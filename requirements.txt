@@ -2,7 +2,6 @@ altgraph==0.10.2
 backports-abc==0.4
 backports.ssl-match-hostname==3.5.0.1
 bdist-mpkg==0.5.0
-bonjour-py==0.3
 certifi==2016.2.28
 click==6.6
 Flask==0.11.1
