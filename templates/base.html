@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <title>PoolaVan</title>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
+  <link rel="stylesheet"  type="text/css" href="/static/styles.css">
+</head>
+
+    
+{% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+      <div class="alert alert-warning">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
+
+<body>
+    
+  {% block content %} put your content here {% endblock %}
+
+</body>
+</html>
