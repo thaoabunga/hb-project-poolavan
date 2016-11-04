@@ -43,12 +43,14 @@ class Trip(db.Model):
     trip_id = db.Column(db.Integer,
                          autoincrement=True,
                          primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     departure_address = db.Column(db.String(50), nullable=False)
     arrival_address = db.Column(db.String(50), nullable=False)
     trip_departure_at = db.Column(db.DateTime, nullable=False)
     trip_arrival_at = db.Column(db.DateTime, nullable=False)
     car_capacity = db.Column(db.Integer, nullable=False)
     activity = db.Column(db.String(30), nullable=False)
+    trip_users = db.relationship('User', backref ='users')
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -72,7 +74,7 @@ class UserTrip(db.Model):
                           primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
-    role = db.Column(db.String(30))
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -91,6 +93,17 @@ class Role(db.Model):
                           primary_key=True)
     role = db.Column(db.String(10), nullable=False)
 
+class Activity(db.Model):
+    """User activity match in a carpool."""
+
+    __tablename__ = "activities"
+
+    activity_id = db.Column(db.Integer,
+                          autoincrement=True,
+                          primary_key=True)
+
+    recreation_acitivity = db.Column(db.String(40), nullable=False)
+
 class RideRequest(db.Model):
     """User ride request."""
 
@@ -100,13 +113,15 @@ class RideRequest(db.Model):
                           autoincrement=True,
                           primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
-    trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
-    role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
+    active = db.Column(db.Boolean, nullable =False) #check to see if user is active, needs a ride
+    trip_departure_at = db.Column(db.DateTime, nullable=False)
+    trip_arrival_at = db.Column(db.DateTime, nullable=False)
+    activity = db.Column(db.String(60), nullable=False)
 
 class TripMessage(db.Model):
     """Trip messages between users in a carpool."""
 
-    __tablename__ = "tripmessages"
+    __tablename__= "tripmessages"
 
     trip_message_id = db.Column(db.Integer,
                           autoincrement=True,
@@ -115,6 +130,7 @@ class TripMessage(db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
     trip_message = db.Column(db.String(140), nullable=False)
     message_tracking = db.Column(db.DateTime)
+
 #####################################################################
 # Helper functions
 

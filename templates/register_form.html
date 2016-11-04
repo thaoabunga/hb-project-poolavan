@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Register</h1>
+
+<h2>Please use your email address as your username.</h2>
+<form action="/register" method="POST">
+    <p>Name (first) <input type="text" name="first_name"></p>
+    <p>Username (email)  <input type="text" name="email"></p>
+    <p>Password  <input type="password" name="password"></p>
+    <p>Gender <select>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+    </p>
+    <p>Activity <select>
+        <option>Snow sports</option>
+        <option>Climbing</option>
+        <option>Hiking</option>
+        <option>Camping</option>
+        <option>Mountain Biking</option>
+    </select>
+    </p>
+    <p>Smoking Preference <select>
+        <option>Non-smoker</option>
+        <option>Smoker</option>
+
+    </select>
+    </p>
+    <input type="submit" value="Register">
+</form>
+
+{% endblock %}
