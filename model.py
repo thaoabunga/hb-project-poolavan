@@ -2,6 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 
@@ -49,8 +50,9 @@ class Trip(db.Model):
     trip_departure_at = db.Column(db.DateTime, nullable=False)
     trip_arrival_at = db.Column(db.DateTime, nullable=False)
     car_capacity = db.Column(db.Integer, nullable=False)
-    activity = db.Column(db.String(30), nullable=False)
-    trip_users = db.relationship('User', backref ='users')
+    activity = db.Column(db.Integer, db.ForeignKey("activities.activity_id", nullable=False)
+    
+    user = db.relationship('User', backref ='trips')
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -61,7 +63,8 @@ class Trip(db.Model):
                                                  self.trip_departure_at,
                                                  self.trip_arrival_at,
                                                  self.car_capacity,
-                                                 self.activity)
+                                                 self.activity,
+                                                 trip_users)
 
 
 class UserTrip(db.Model):
@@ -104,21 +107,21 @@ class Activity(db.Model):
 
     recreation_acitivity = db.Column(db.String(40), nullable=False)
 
-class RideRequest(db.Model):
-    """User ride request."""
+# class RideRequest(db.Model):
+#     """User ride request."""
 
-    __tablename__ = "riderequests"
+#     __tablename__ = "riderequests"
 
-    ride_request_id = db.Column(db.Integer,
-                          autoincrement=True,
-                          primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
-    active = db.Column(db.Boolean, nullable =False) #check to see if user is active, needs a ride
-    trip_departure_at = db.Column(db.DateTime, nullable=False)
-    trip_arrival_at = db.Column(db.DateTime, nullable=False)
-    activity = db.Column(db.String(60), nullable=False)
+#     ride_request_id = db.Column(db.Integer,
+#                           autoincrement=True,
+#                           primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+#     active = db.Column(db.Boolean, nullable =False) #check to see if user is active, needs a ride
+#     trip_departure_at = db.Column(db.DateTime, nullable=False)
+#     trip_arrival_at = db.Column(db.DateTime, nullable=False)
+#     activity = db.Column(db.String(60), nullable=False)
 
-class TripMessage(db.Model):
+class TripMessage(db.Model): #second sprint TBD
     """Trip messages between users in a carpool."""
 
     __tablename__= "tripmessages"

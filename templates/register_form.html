@@ -4,17 +4,18 @@
 
 <h1>Register</h1>
 
-<h2>Please use your email address as your username.</h2>
-<form action="/register" method="POST">
+<h3>Please use your email address as your username.</h3>
+<form action="register" method="POST">
     <p>Name (first) <input type="text" name="first_name"></p>
-    <p>Username (email)  <input type="text" name="email"></p>
+    <p>Username (email)  <input type="text" name="username"></p>
+    <p>Phone number <input type="text" name="phone_number"></p>
     <p>Password  <input type="password" name="password"></p>
-    <p>Gender <select>
+    <p>Gender <select name="gender">
         <option>Male</option>
         <option>Female</option>
     </select>
     </p>
-    <p>Activity <select>
+    <p>Activity <select name="activity">
         <option>Snow sports</option>
         <option>Climbing</option>
         <option>Hiking</option>
@@ -22,7 +23,7 @@
         <option>Mountain Biking</option>
     </select>
     </p>
-    <p>Smoking Preference <select>
+    <p>Smoking Preference <select name="smokingpreference">
         <option>Non-smoker</option>
         <option>Smoker</option>
 

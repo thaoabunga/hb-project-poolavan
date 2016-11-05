@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 
 
-from model import connect_to_db, db, User
+from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity, RideRequest, Activity, TripMessage
 
 app = Flask(__name__)
 
@@ -41,13 +41,13 @@ def user_list():
                             users=users)
 
 
-# @app.route("/trips")
-# def movie_list():
-#     """Show list of trips."""
+@app.route("/trips")
+def trip_list():
+    """Show list of trips."""
 
-#     movies = Movie.query.order_by(Movie.title).all()
-#     return render_template("movie_list.html", 
-#                             movies=movies)
+    trips = Trip.query.order_by(Trip.departure_address).all()
+    return render_template("trip_list.html", 
+                            trips=trips)
 
 
 @app.route("/register", methods=["GET"])
@@ -74,6 +74,7 @@ def register_new_user():
     
     username = request.form['username']
     password = request.form['password']
+    
 
     user_in_db = db.session.query(User).filter(User.email==username).all()
 
@@ -137,4 +138,4 @@ if __name__ == "__main__":
     # Use the DebugToolbar
     DebugToolbarExtension(app)
 
-    app.run(host="0.0.0.0")
+    app.run(port=5000, host="0.0.0.0")
