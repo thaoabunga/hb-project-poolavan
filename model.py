@@ -13,6 +13,10 @@ db = SQLAlchemy()
 #     Column('user_id', Integer, ForeignKey('user.id')),
 #     Column('trip_id', Integer, ForeignKey('trip.id')))
 
+usertrips = db.Table('user_trips',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.user_id')),
+    db.Column('trip_id', db.Integer, db.ForeignKey('trips.trip_id')))
+
 class User(db.Model):
     """User of PoolaVan website."""
 
@@ -22,22 +26,22 @@ class User(db.Model):
                         autoincrement=True,
                         primary_key=True)
     first_name = db.Column(db.String(30), nullable=False)
-    email = db.Column(db.String(64), nullable=False)
+    username = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(64), nullable=False)
     phone_number = db.Column(db.String(20), nullable=False)
     gender = db.Column(db.String(10))
     smoking_preference = db.Column(db.String(15))
 
-    # trips = relationship("Trip", secondary=user_trip_table,
-    #     back_populates="users")
+    trips = db.relationship('Trip', secondary=usertrips,
+        backref=db.backref('users', lazy='dynamic'))
 
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<User user_id=%s first_name=%s email=%s password=%s phone_number=%s gender=%s smoking_preference=%s>" % (self.user_id,
+        return "<User user_id=%s first_name=%s username=%s password=%s phone_number=%s gender=%s smoking_preference=%s>" % (self.user_id,
                                             self.first_name,
-                                            self.email,
+                                            self.username,
                                             self.password,
                                             self.phone_number,
                                             self.gender,
@@ -50,25 +54,23 @@ class Trip(db.Model):
     trip_id = db.Column(db.Integer,
                          autoincrement=True,
                          primary_key=True)
-    user_trip_id = db.Column(db.Integer, db.ForeignKey("usertrips.user_trip_id"), nullable=False)
+    trip_name = db.Column(db.String(50), nullable=False)
     departure_address = db.Column(db.String(50), nullable=False)
     arrival_address = db.Column(db.String(50), nullable=False)
     trip_departure_at = db.Column(db.DateTime, nullable=False)
     trip_arrival_at = db.Column(db.DateTime, nullable=False)
-    car_capacity = db.Column(db.Integer, nullable=False)
-    activity_id = db.Column(db.Integer, db.ForeignKey("activities.activity_id"), nullable=False)
-    
+    car_capacity = db.Column(db.Integer, nullable=False)    
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Trip trip_id=%s departure_address=%s arrival_address=%s trip_departure_at=%s trip_arrival_at=%s car_capacity=%s activity=%s>" % (self.trip_id,
+        return "<Trip trip_id=%s departure_address=%s arrival_address=%s trip_departure_at=%s trip_arrival_at=%s car_capacity=%s users=%s>" % (self.trip_id,
                                                  self.departure_address,
                                                  self.arrival_address,
                                                  self.trip_departure_at,
                                                  self.trip_arrival_at,
                                                  self.car_capacity,
-                                                 trip_users)
+                                                 self.users)
 
 
 # class UserTrip(db.Model):

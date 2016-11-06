@@ -71,6 +71,7 @@ def logout():
 @app.route("/register", methods=["POST"])
 def register_new_user():
     """Add new users."""
+    print "entering the register new user method"
 
     first_name = request.form['first_name']
     username = request.form['username']
@@ -79,8 +80,11 @@ def register_new_user():
     gender = request.form['gender']
     smoking_preference = request.form['smoking_preference']
 
+    print "write all variables from request"
 
-    user_in_db = db.session.query(User).filter(User.email==username).all()
+    user_in_db = db.session.query(User).filter(User.username==username).all()
+
+    print user_in_db
 
     # if username (email) is in not in database, add them 
     if not user_in_db:
@@ -89,6 +93,8 @@ def register_new_user():
         new_user = User(first_name=first_name, username=username, password=password, phone_number=phone_number, gender=gender, smoking_preference=smoking_preference)
         db.session.add(new_user)
         db.session.commit()
+
+        print new_user
 
     # redirect to homepage
     return redirect("/")
@@ -106,7 +112,7 @@ def user_login():
     if "user_id" not in session:
         session["user_id"] = {}
 
-    current_user = User.query.filter_by(email=username).first()
+    current_user = User.query.filter_by(username=username).first()
 
     # check login credentials against database, and route user accordingly
     if not current_user:
@@ -126,7 +132,13 @@ def user_login():
         flash("Password does not match. Please try again.")
         return redirect("/")
 
-@app.route("/createtrip", methods=['POST'])
+@app.route("/createtrip", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
+def createtrip_form():
+    """Display new trips."""
+
+    return render_template("createtrip_form.html") 
+
+@app.route("/createtrip", methods=['POST']) 
 def create_trip():
     """User creates a trip."""
 
@@ -134,6 +146,8 @@ def create_trip():
     #add current user to the trip
     username = session["user_id"]
     current_user = User.query.filter_by(user_id=username).first()
+    #create a list of users in a trip
+
 
  
 
