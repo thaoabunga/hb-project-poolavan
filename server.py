@@ -71,7 +71,6 @@ def logout():
 @app.route("/register", methods=["POST"])
 def register_new_user():
     """Add new users."""
-    print "entering the register new user method"
 
     first_name = request.form['first_name']
     username = request.form['username']
@@ -80,11 +79,9 @@ def register_new_user():
     gender = request.form['gender']
     smoking_preference = request.form['smoking_preference']
 
-    print "write all variables from request"
 
     user_in_db = db.session.query(User).filter(User.username==username).all()
 
-    print user_in_db
 
     # if username (email) is in not in database, add them 
     if not user_in_db:
@@ -147,10 +144,25 @@ def create_trip():
     username = session["user_id"]
     current_user = User.query.filter_by(user_id=username).first()
     #create a list of users in a trip
+    #collect all variables
+    #add to session
+    #current_user.
+    trip_name = request.form['trip_name']
+    origin = request.form['departure_address']
+    arrival = request.form['arrival_address']
+    departure_time = request.form['trip_departure_at']
+    arrival_time = request.form['trip_arrival_at']
+    car_capacity = request.form['car_capacity']
 
+    #add users to carpool
 
- 
+    carpool_list = []
 
+    #query users with the same activity
+
+    #search for similar passengers regarding activity
+
+    #create ajax call in createtrip_form.html for updating carpool_list of similar users
 
 
 
