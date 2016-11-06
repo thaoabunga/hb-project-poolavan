@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 
 
-from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity, RideRequest, Activity, TripMessage
+from model import connect_to_db, db, User, Trip, Role, Activity
 
 app = Flask(__name__)
 
@@ -71,10 +71,14 @@ def logout():
 @app.route("/register", methods=["POST"])
 def register_new_user():
     """Add new users."""
-    
+
+    first_name = request.form['first_name']
     username = request.form['username']
     password = request.form['password']
-    
+    phone_number = request.form['phone_number']
+    gender = request.form['gender']
+    smoking_preference = request.form['smoking_preference']
+
 
     user_in_db = db.session.query(User).filter(User.email==username).all()
 
@@ -82,7 +86,7 @@ def register_new_user():
     if not user_in_db:
         # add to db
 
-        new_user = User(email=username, password=password)
+        new_user = User(first_name=first_name, username=username, password=password, phone_number=phone_number, gender=gender, smoking_preference=smoking_preference)
         db.session.add(new_user)
         db.session.commit()
 
@@ -97,6 +101,7 @@ def user_login():
 
     username = request.form['username']
     password = request.form['password']
+
 
     if "user_id" not in session:
         session["user_id"] = {}
@@ -121,6 +126,16 @@ def user_login():
         flash("Password does not match. Please try again.")
         return redirect("/")
 
+@app.route("/createtrip", methods=['POST'])
+def create_trip():
+    """User creates a trip."""
+
+    #create trip form in html
+    #add current user to the trip
+    username = session["user_id"]
+    current_user = User.query.filter_by(user_id=username).first()
+
+ 
 
 
 

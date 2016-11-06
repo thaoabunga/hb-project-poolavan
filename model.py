@@ -1,6 +1,7 @@
 """Models and database functions for PoolaVan."""
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Table
 
 
 db = SQLAlchemy()
@@ -8,6 +9,9 @@ db = SQLAlchemy()
 
 #####################################################################
 # Model definitions
+# user_trip_table = Table('user_trip', Base.metadata,
+#     Column('user_id', Integer, ForeignKey('user.id')),
+#     Column('trip_id', Integer, ForeignKey('trip.id')))
 
 class User(db.Model):
     """User of PoolaVan website."""
@@ -24,6 +28,10 @@ class User(db.Model):
     gender = db.Column(db.String(10))
     smoking_preference = db.Column(db.String(15))
 
+    # trips = relationship("Trip", secondary=user_trip_table,
+    #     back_populates="users")
+
+
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -34,8 +42,6 @@ class User(db.Model):
                                             self.phone_number,
                                             self.gender,
                                             self.smoking_preference)
-
-
 class Trip(db.Model):
     """Initial trip details."""
 
@@ -44,15 +50,14 @@ class Trip(db.Model):
     trip_id = db.Column(db.Integer,
                          autoincrement=True,
                          primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    user_trip_id = db.Column(db.Integer, db.ForeignKey("usertrips.user_trip_id"), nullable=False)
     departure_address = db.Column(db.String(50), nullable=False)
     arrival_address = db.Column(db.String(50), nullable=False)
     trip_departure_at = db.Column(db.DateTime, nullable=False)
     trip_arrival_at = db.Column(db.DateTime, nullable=False)
     car_capacity = db.Column(db.Integer, nullable=False)
-    activity = db.Column(db.Integer, db.ForeignKey("activities.activity_id", nullable=False)
+    activity_id = db.Column(db.Integer, db.ForeignKey("activities.activity_id"), nullable=False)
     
-    user = db.relationship('User', backref ='trips')
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -63,28 +68,27 @@ class Trip(db.Model):
                                                  self.trip_departure_at,
                                                  self.trip_arrival_at,
                                                  self.car_capacity,
-                                                 self.activity,
                                                  trip_users)
 
 
-class UserTrip(db.Model):
-    """User and Trip details."""
+# class UserTrip(db.Model):
+#     """User and Trip details."""
 
-    __tablename__ = "usertrips"
+#     __tablename__ = "usertrips"
 
-    user_trip_id = db.Column(db.Integer,
-                          autoincrement=True,
-                          primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
-    trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
-    role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
+#     user_trip_id = db.Column(db.Integer,
+#                           autoincrement=True,
+#                           primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+#     trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
+#     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
 
-    def __repr__(self):
-        """Provide helpful representation when printed."""
+#     def __repr__(self):
+#         """Provide helpful representation when printed."""
 
-        s = "<UserTrip user_trip_id=%s user_id=%s trip_id=%s role=%s>"
-        return s % (self.user_trip_id, self.user_id, self.trip_id,
-                    self.role)
+#         s = "<UserTrip user_trip_id=%s user_id=%s trip_id=%s role=%s>"
+#         return s % (self.user_trip_id, self.user_id, self.trip_id,
+#                     self.role)
 
 class Role(db.Model):
     """User roles in a carpool."""
@@ -121,18 +125,18 @@ class Activity(db.Model):
 #     trip_arrival_at = db.Column(db.DateTime, nullable=False)
 #     activity = db.Column(db.String(60), nullable=False)
 
-class TripMessage(db.Model): #second sprint TBD
-    """Trip messages between users in a carpool."""
+# class TripMessage(db.Model): #second sprint TBD
+#     """Trip messages between users in a carpool."""
 
-    __tablename__= "tripmessages"
+#     __tablename__= "tripmessages"
 
-    trip_message_id = db.Column(db.Integer,
-                          autoincrement=True,
-                          primary_key=True)
-    trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
-    role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
-    trip_message = db.Column(db.String(140), nullable=False)
-    message_tracking = db.Column(db.DateTime)
+#     trip_message_id = db.Column(db.Integer,
+#                           autoincrement=True,
+#                           primary_key=True)
+#     trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
+#     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
+#     trip_message = db.Column(db.String(140), nullable=False)
+#     message_tracking = db.Column(db.DateTime)
 
 #####################################################################
 # Helper functions
