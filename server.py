@@ -157,13 +157,32 @@ def create_trip():
     trip_arrival_at = request.form['trip_arrival_at']
     car_capacity = request.form['car_capacity']
 
-    new_trip = Trip(trip_name=trip_name, departure_address=departure_address, arrival_address=arrival_address, trip_departure_at=trip_departure_at, trip_arrival_at=trip_arrival_at, car_capacity=car_capacity)
+
+    new_trip = Trip(trip_name=trip_name, 
+                    departure_address=departure_address, 
+                    arrival_address=arrival_address, 
+                    trip_departure_at=trip_departure_at, 
+                    trip_arrival_at=trip_arrival_at, 
+                    car_capacity=car_capacity)
     db.session.add(new_trip)
     db.session.commit()
 
-    #add users to carpool
+@app.route("/jointrip", methods=['POST'])
+def join_trip():
+    """User joins a trip."""
 
-    #carpool_list = []
+    carpool_list = []
+    #add users to carpool
+    #add_user = input("Please enter a first_name: ")
+    current_user = User.query.filter_by(user_id=username).first()
+
+
+    if current_user not in carpool_list:
+            carpool_list.append(current_user)
+
+    #for users in carpool_list:
+        #print ("s"% users)
+
 
     #query users with the same activity/or add search functionality
 

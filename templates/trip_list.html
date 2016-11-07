@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>Trips</h2>
+    <h4>Select a trip to join a trip!</h4>
+    <ul>
+      {% for trip in trips %}
+          <li>
+              <a href="/trips/{{ trip.trip_id }}">
+                {{ trip.trip_name }} ({{ trip.trip_id }})
+              </a>
+          </li>
+      {% endfor %}
+    </ul>
+
+{% endblock %}
