@@ -91,7 +91,6 @@ def register_new_user():
         db.session.add(new_user)
         db.session.commit()
 
-        print new_user
 
     # redirect to homepage
     return redirect("/")
@@ -142,28 +141,36 @@ def create_trip():
     #create trip form in html
     #add current user to the trip
     username = session["user_id"]
+    print username
+
     current_user = User.query.filter_by(user_id=username).first()
+
+    print current_user
     #create a list of users in a trip
     #collect all variables
     #add to session
     #current_user.
     trip_name = request.form['trip_name']
-    origin = request.form['departure_address']
-    arrival = request.form['arrival_address']
-    departure_time = request.form['trip_departure_at']
-    arrival_time = request.form['trip_arrival_at']
+    departure_address = request.form['departure_address']
+    arrival_address = request.form['arrival_address']
+    trip_departure_at = request.form['trip_departure_at']
+    trip_arrival_at = request.form['trip_arrival_at']
     car_capacity = request.form['car_capacity']
+
+    new_trip = Trip(trip_name=trip_name, departure_address=departure_address, arrival_address=arrival_address, trip_departure_at=trip_departure_at, trip_arrival_at=trip_arrival_at, car_capacity=car_capacity)
+    db.session.add(new_trip)
+    db.session.commit()
 
     #add users to carpool
 
-    carpool_list = []
+    #carpool_list = []
 
-    #query users with the same activity
+    #query users with the same activity/or add search functionality
 
     #search for similar passengers regarding activity
 
     #create ajax call in createtrip_form.html for updating carpool_list of similar users
-
+    return redirect("/")
 
 
 

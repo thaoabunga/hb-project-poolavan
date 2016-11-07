@@ -64,7 +64,7 @@ class Trip(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Trip trip_id=%s departure_address=%s arrival_address=%s trip_departure_at=%s trip_arrival_at=%s car_capacity=%s users=%s>" % (self.trip_id,
+        return "<Trip trip_id=%s trip_name=%s departure_address=%s arrival_address=%s trip_departure_at=%s trip_arrival_at=%s car_capacity=%s users=%s>" % (self.trip_id, self.trip_name,
                                                  self.departure_address,
                                                  self.arrival_address,
                                                  self.trip_departure_at,
