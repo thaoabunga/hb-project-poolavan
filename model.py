@@ -6,7 +6,6 @@ from sqlalchemy import Table
 
 db = SQLAlchemy()
 
-
 #####################################################################
 # Model definitions
 # user_trip_table = Table('user_trip', Base.metadata,
@@ -91,6 +90,9 @@ class Trip(db.Model):
 #         s = "<UserTrip user_trip_id=%s user_id=%s trip_id=%s role=%s>"
 #         return s % (self.user_trip_id, self.user_id, self.trip_id,
 #                     self.role)
+
+# user trip table -- add accepted or reject field in trip
+
 
 class Role(db.Model):
     """User roles in a carpool."""

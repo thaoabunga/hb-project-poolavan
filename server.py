@@ -39,15 +39,31 @@ def user_list():
     users = User.query.all()
     return render_template("user_list.html", 
                             users=users)
+@app.route("/users/<int:user_id>", methods=["GET"])
+def user_detail(user_id):
+    """Show info about user."""
 
+    user = User.query.get(user_id)
+    return render_template("user.html", user=user)
 
-@app.route("/trips")
+@app.route("/trips") #add another activity search route, form submits to trip activity
 def trip_list():
     """Show list of trips."""
 
     trips = Trip.query.order_by(Trip.departure_address).all()
     return render_template("trip_list.html", 
                             trips=trips)
+
+@app.route("/trips/<int:trip_id>", methods=["GET"])
+def trip_detail(trip_id):
+    """Show info about trip."""
+
+    trip = Trip.query.get(trip_id)
+    return render_template("trip.html", trip=trip)
+
+# if car capacity not at max, request to join a trip?
+# filter car capacity ? find a way to update car capacity as users are added, removed, and max cap is reached
+
 
 
 @app.route("/register", methods=["GET"])
@@ -128,9 +144,15 @@ def user_login():
         flash("Password does not match. Please try again.")
         return redirect("/")
 
-@app.route("/createtrip", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
+# @app.route("/newtrips", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
+# def createtrip_form():
+#     """Display new trips."""
+
+#     return render_template("newtrip_form.html")
+
+@app.route("/createtrip")
 def createtrip_form():
-    """Display new trips."""
+    """Show User Create trip form."""
 
     return render_template("createtrip_form.html") 
 
@@ -167,18 +189,24 @@ def create_trip():
     db.session.add(new_trip)
     db.session.commit()
 
-@app.route("/jointrip", methods=['POST'])
-def join_trip():
-    """User joins a trip."""
+    return redirect("/") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
+# @app.route("/jointrip")
+# def join_trip_form():
+#     """Show user join trip form."""
+#     return render_template("trip_list.html")
 
-    carpool_list = []
-    #add users to carpool
-    #add_user = input("Please enter a first_name: ")
-    current_user = User.query.filter_by(user_id=username).first()
+# @app.route("/jointrip", methods=['POST'])
+# def join_trip():
+#     """User joins a trip."""
+
+#     carpool_list = []
+#     #add users to carpool
+#     #add_user = input("Please enter a first_name: ")
+#     current_user = User.query.filter_by(user_id=username).first()
 
 
-    if current_user not in carpool_list:
-            carpool_list.append(current_user)
+#     if current_user not in carpool_list:
+#             carpool_list.append(current_user)
 
     #for users in carpool_list:
         #print ("s"% users)
@@ -189,7 +217,7 @@ def join_trip():
     #search for similar passengers regarding activity
 
     #create ajax call in createtrip_form.html for updating carpool_list of similar users
-    return redirect("/")
+
 
 
 
