@@ -167,7 +167,7 @@ def create_trip():
 
     current_user = User.query.filter_by(user_id=username).first()
 
-    print current_user
+
     #create a list of users in a trip
     #collect all variables
     #add to session
@@ -189,11 +189,13 @@ def create_trip():
     db.session.add(new_trip)
     db.session.commit()
 
-    return redirect("/") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
-# @app.route("/jointrip")
-# def join_trip_form():
-#     """Show user join trip form."""
-#     return render_template("trip_list.html")
+    return redirect("/same") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
+
+@app.route("/same")
+def same_form():
+    """Show users within the same location and activity form."""
+
+    return render_template("same_list.html")
 
 # @app.route("/jointrip", methods=['POST'])
 # def join_trip():
