@@ -10,11 +10,11 @@ db = SQLAlchemy()
 # Model definitions
 # user_trip_table = Table('user_trip', Base.metadata,
 #     Column('user_id', Integer, ForeignKey('user.id')),
-#     Column('trip_id', Integer, ForeignKey('trip.id')))
+# #     Column('trip_id', Integer, ForeignKey('trip.id')))
 
-usertrips = db.Table('user_trips',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.user_id')),
-    db.Column('trip_id', db.Integer, db.ForeignKey('trips.trip_id')))
+# usertrips = db.Table('user_trips',
+#     db.Column('user_id', db.Integer, db.ForeignKey('users.user_id')),
+#     db.Column('trip_id', db.Integer, db.ForeignKey('trips.trip_id')))
 
 class User(db.Model):
     """User of PoolaVan website."""
@@ -31,8 +31,7 @@ class User(db.Model):
     gender = db.Column(db.String(10))
     smoking_preference = db.Column(db.String(15))
 
-    trips = db.relationship('Trip', secondary=usertrips,
-        backref=db.backref('users', lazy='dynamic'))
+    trips = db.relationship('Trip', secondary= 'usertrips', backref='users')
 
 
     def __repr__(self):
@@ -72,26 +71,25 @@ class Trip(db.Model):
                                                  self.users)
 
 
-# class UserTrip(db.Model):
-#     """User and Trip details."""
+class UserTrip(db.Model):
+    """User and Trip details."""
 
-#     __tablename__ = "usertrips"
+    __tablename__ = "usertrips"
 
-#     user_trip_id = db.Column(db.Integer,
-#                           autoincrement=True,
-#                           primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
-#     trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
-#     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
+    user_trip_id = db.Column(db.Integer,
+                          autoincrement=True,
+                          primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
+    request = db.Column(db.String(50), nullable=False)
 
-#     def __repr__(self):
-#         """Provide helpful representation when printed."""
+    def __repr__(self):
+        """Provide helpful representation when printed."""
 
-#         s = "<UserTrip user_trip_id=%s user_id=%s trip_id=%s role=%s>"
-#         return s % (self.user_trip_id, self.user_id, self.trip_id,
-#                     self.role)
+        s = "<UserTrip user_trip_id=%s user_id=%s trip_id=%s request=%s>"
+        return s % (self.user_trip_id, self.user_id, self.trip_id,
+                    self.request)
 
-# user trip table -- add accepted or reject field in trip
 
 
 class Role(db.Model):
@@ -113,7 +111,7 @@ class Activity(db.Model):
                           autoincrement=True,
                           primary_key=True)
 
-    recreation_acitivity = db.Column(db.String(40), nullable=False)
+    recreation_activity = db.Column(db.String(40), nullable=False)
 
 # class RideRequest(db.Model):
 #     """User ride request."""
