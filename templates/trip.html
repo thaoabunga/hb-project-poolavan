@@ -7,14 +7,16 @@
 <div class="row">
 
     <div class="col-xs-12 col-lg-6">
-        <p>Trip: {{ trip.trip_name }}</p>
+        <form action="/jointrip" method="POST">
+            <p>Trip: {{ trip.trip_name }}</p>
 
-        <p>Origin: {{ trip.departure_address }}</p>
-        <p>Arrival: {{ trip.arrival_address }}</p>
-        <p>Departure Time: {{ trip.trip_departure_at }}</p>
-        <p>Arrival Time: {{ trip.trip_arrival_at }}</p>
-        <p>Car Capacity: {{ trip.car_capacity }}</p>
-        <input type="submit" value="Join Trip">
-
+            <p>Origin: {{ trip.departure_address }}</p>
+            <p>Arrival: {{ trip.arrival_address }}</p>
+            <p>Departure Time: {{ trip.trip_departure_at }}</p>
+            <p>Arrival Time: {{ trip.trip_arrival_at }}</p>
+            <p>Car Capacity: {{ trip.car_capacity }}</p>
+            <input type="hidden" name="trip_id" value={{ trip.trip_id }} />
+            <input type="submit" value="Join Trip "/>
+        </form>
     </div>
   {% endblock %}

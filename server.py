@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 
 
-from model import connect_to_db, db, User, Trip, Role, Activity
+from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
 
@@ -153,7 +153,6 @@ def user_login():
 @app.route("/createtrip")
 def createtrip_form():
     """Show User Create trip form."""
-
     return render_template("createtrip_form.html") 
 
 @app.route("/createtrip", methods=['POST']) 
@@ -162,10 +161,10 @@ def create_trip():
 
     #create trip form in html
     #add current user to the trip
-    username = session["user_id"]
-    print username
+   
+    user_id = session["user_id"]
 
-    current_user = User.query.filter_by(user_id=username).first()
+    current_user = User.query.filter_by(user_id=user_id).first()
 
 
     #create a list of users in a trip
@@ -187,41 +186,40 @@ def create_trip():
                     trip_arrival_at=trip_arrival_at, 
                     car_capacity=car_capacity)
     db.session.add(new_trip)
+    db.session.flush() #gives new_trip an id in order to complete the transaction not permanent- easy access
+
+    new_user_trip = UserTrip(user_id=current_user.user_id, trip_id=new_trip.trip_id, request='active')
+
+    db.session.add_all([new_trip, new_user_trip, current_user])
+
     db.session.commit()
 
-    return redirect("/same") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
 
-@app.route("/same")
-def same_form():
-    """Show users within the same location and activity form."""
+    return redirect("/usertrip") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
 
-    return render_template("same_list.html")
+@app.route("/usertrip")
+def usertrip_all():
+    """Show users within the same location and activity."""
 
-# @app.route("/jointrip", methods=['POST'])
-# def join_trip():
-#     """User joins a trip."""
-
-#     carpool_list = []
-#     #add users to carpool
-#     #add_user = input("Please enter a first_name: ")
-#     current_user = User.query.filter_by(user_id=username).first()
-
-
-#     if current_user not in carpool_list:
-#             carpool_list.append(current_user)
-
-    #for users in carpool_list:
-        #print ("s"% users)
-
-
-    #query users with the same activity/or add search functionality
-
-    #search for similar passengers regarding activity
-
-    #create ajax call in createtrip_form.html for updating carpool_list of similar users
+    return render_template("usertrip_list.html",
+                        usertrips=UserTrip.query.all())
 
 
 
+@app.route("/jointrip", methods=['POST'])
+def join_trip():
+    """User joins a trip."""
+
+    current_user = User.query.filter_by(user_id=session['user_id']).first()
+    trip_id = request.form['trip_id']
+    trip = Trip.query.filter_by(trip_id=trip_id).first()
+
+    new_user_trip = UserTrip(user_id=current_user.user_id, trip_id=trip.trip_id, request='active')
+
+    db.session.add_all([new_user_trip, current_user])
+
+    db.session.commit()
+    return redirect("/trips/" + trip_id) # use url_for instead
 
     
 
@@ -229,6 +227,7 @@ if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
     app.debug = True
+    app.config['DEBUG'] = True
     app.jinja_env.auto_reload = app.debug
     connect_to_db(app)
 

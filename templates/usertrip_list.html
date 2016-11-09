@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>Common Users with the same trip</h2>
+    <ul>
+      {% for usertrip in usertrips %}
+          <li>
+              <a href="/usertrip/{{ usertrip.user_id }}">
+                Trip: {{ usertrip.trip_id }}  User Id: ({{ usertrip.user_id }})
+              </a>
+          </li>
+      {% endfor %}
+    </ul>
+
+{% endblock %}
