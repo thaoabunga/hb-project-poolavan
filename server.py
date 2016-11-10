@@ -44,7 +44,12 @@ def user_detail(user_id):
     """Show info about user."""
 
     user = User.query.get(user_id)
-    return render_template("user.html", user=user)
+    usertrip = user.trips
+    #usertrip = User.trips
+    #return render_template("user.html", user=user)
+    return render_template("user.html", user=user, usertrip=usertrip)
+
+
 
 @app.route("/trips") #add another activity search route, form submits to trip activity
 def trip_list():
@@ -204,7 +209,12 @@ def usertrip_all():
     return render_template("usertrip_list.html",
                         usertrips=UserTrip.query.all())
 
+# @app.route("/usertrip/" + user_trip_id)
+# def usertrip_all():
+#     """Show usertrips details."""
 
+#     UserTrip = UserTrip.query.get(user_trip_id)
+#     return render_template("trip.html", trip=trip)
 
 @app.route("/jointrip", methods=['POST'])
 def join_trip():
@@ -218,9 +228,15 @@ def join_trip():
 
     db.session.add_all([new_user_trip, current_user])
 
-    db.session.commit()
-    return redirect("/trips/" + trip_id) # use url_for instead
+    db.session.commit()  
+    #return redirect("/trips/" + trip_id) # use url_for instead should this go to a wait for confirmation page?
+    return redirect("/requestconfirmation")
 
+@app.route("/requestconfirmation")
+def confirmation_form():
+    """User receives confirmation of joining a trip."""
+
+    return render_template("request_confirmation.html")
     
 
 if __name__ == "__main__":
