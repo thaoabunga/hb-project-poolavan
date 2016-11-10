@@ -49,6 +49,14 @@ def user_detail(user_id):
     #return render_template("user.html", user=user)
     return render_template("user.html", user=user, usertrip=usertrip)
 
+# @app.route("/mytrips", methods=["GET"])
+# def mytrips_detail():
+#     """Show trips created by user."""
+
+#     user_id = session["user_id"]
+
+#     current_user = User.query.filter_by(user_id=user_id).first()
+
 
 
 @app.route("/trips") #add another activity search route, form submits to trip activity
@@ -172,7 +180,7 @@ def create_trip():
     current_user = User.query.filter_by(user_id=user_id).first()
 
 
-    #create a list of users in a trip
+
     #collect all variables
     #add to session
     #current_user.

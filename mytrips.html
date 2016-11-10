@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="well spaced" style="width:97%;">
+<h1>{{ trip.trip_name }}</h1>
+
+<div class="row">
+
+    <div class="col-xs-12 col-lg-6">
+        <form action="/mytrips" method="POST">
+            <p>My Trips: {{ trip.trip_name }}</p>
+
+            <p>Origin: {{ trip.departure_address }}</p>
+            <p>Arrival: {{ trip.arrival_address }}</p>
+            <p>Departure Time: {{ trip.trip_departure_at }}</p>
+            <p>Arrival Time: {{ trip.trip_arrival_at }}</p>
+            <p>Car Capacity: {{ trip.car_capacity }}</p>
+
+        </form>
+    </div>
+  {% endblock %}
