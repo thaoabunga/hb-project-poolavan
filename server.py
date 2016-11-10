@@ -202,12 +202,15 @@ def create_trip():
 
     return redirect("/usertrip") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
 
-@app.route("/usertrip")
-def usertrip_all():
-    """Show users within the same location and activity."""
+# @app.route("/usertrip")
+# def usertrip_all():
+#     """Show users within the same location and activity."""
 
-    return render_template("usertrip_list.html",
-                        usertrips=UserTrip.query.all())
+#     user = User.query.get(user_id)
+#     usertrip = user.trips.departure_address
+#     #usertrip = User.trips
+#     #return render_template("user.html", user=user)
+#     return render_template("usertrip_list.html", user=user, usertrip=usertrip)
 
 # @app.route("/usertrip/" + user_trip_id)
 # def usertrip_all():
