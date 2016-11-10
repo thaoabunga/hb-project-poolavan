@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="well spaced" style="width:97%;">
+
+
+<div class="row">
+
+    <div class="col-xs-12 col-lg-6">
+
+        <p>My Trips:</p>   
+        	<p>{% for trip in usertrip %} 
+              {{ trip.trip_name }} ({{ trip.trip_id }})</p>
+    </div>
+    {% endfor %}
+  {% endblock %}

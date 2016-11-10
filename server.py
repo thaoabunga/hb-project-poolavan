@@ -3,7 +3,8 @@ from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
-
+from hashlib import md5
+from datetime import datetime
 
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
@@ -14,7 +15,7 @@ app.secret_key = "ABC"
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route('/')
+@app.route('/homepage')
 def hello_world():
     """Homepage."""
 
@@ -27,6 +28,7 @@ def before_request():
 
     if "logged_in" not in session and request.endpoint != 'login':
         session["logged_in"] = False
+
 
 
 
@@ -49,14 +51,14 @@ def user_detail(user_id):
     #return render_template("user.html", user=user)
     return render_template("user.html", user=user, usertrip=usertrip)
 
-# @app.route("/mytrips", methods=["GET"])
-# def mytrips_detail():
-#     """Show trips created by user."""
+@app.route("/mytrips") #TODO 
+def mytrips_detail():
+    """Show trips created by user."""
 
-#     user_id = session["user_id"]
-
-#     current_user = User.query.filter_by(user_id=user_id).first()
-
+    user_id = session["user_id"]
+    user = User.query.get(user_id)
+    usertrip = user.trips
+    return render_template("mytrips.html", user=user, usertrip=usertrip)
 
 
 @app.route("/trips") #add another activity search route, form submits to trip activity
@@ -94,7 +96,7 @@ def logout():
     session['logged_in'] = False
 
     flash("Successfully logged out!")
-    return redirect("/")
+    return redirect("/homepage")
 
 
 @app.route("/register", methods=["POST"])
@@ -122,7 +124,7 @@ def register_new_user():
 
 
     # redirect to homepage
-    return redirect("/")
+    return redirect("/homepage")
 
 
 
@@ -150,12 +152,12 @@ def user_login():
         session["user_id"] = current_user.user_id
         session["logged_in"] = True
         flash("Successfully logged in!")
-        return redirect("/")
+        return redirect("/homepage")
 
     # if username in db and password belongs to same user, redirect to homepage 
     elif current_user.password != password:
         flash("Password does not match. Please try again.")
-        return redirect("/")
+        return redirect("/homepage")
 
 # @app.route("/newtrips", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
 # def createtrip_form():
