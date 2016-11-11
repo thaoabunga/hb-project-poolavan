@@ -210,7 +210,7 @@ def create_trip():
     db.session.commit()
 
 
-    return redirect("/usertrip") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
+    return redirect("/homepage") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
 
 # @app.route("/usertrip")
 # def usertrip_all():
