@@ -2,13 +2,16 @@
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, redirect, session, flash
+from flask_mail import Mail, Message
 from flask_debugtoolbar import DebugToolbarExtension
 from hashlib import md5
 from datetime import datetime
 
+
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
+mail = Mail(app)
 
 app.secret_key = "ABC"
 
