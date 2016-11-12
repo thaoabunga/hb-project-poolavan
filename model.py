@@ -86,7 +86,7 @@ class UserTrip(db.Model):
     request = db.Column(db.String(50), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey("activities.activity_id"), nullable=False)
-
+    trip = db.relationship('Trip', uselist=False) #uselist this relationship is 1:1, single obj 
     usertrips_ = db.relationship('Activity', backref='usertrips')
     # write method on how to access user's role and 
 

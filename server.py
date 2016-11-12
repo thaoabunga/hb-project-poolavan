@@ -58,9 +58,16 @@ def mytrips_detail():
 
     user_id = session["user_id"]
     user = User.query.get(user_id)
-    usertrip = user.trips
+    
+    #usertrip = user.trips
+    # Convert this field to Enum on the model
+    passenger_role = Role.query.filter_by(role='passenger').first()
+    driver_role = Role.query.filter_by(role='driver').first()
 
-    return render_template("mytrips.html", user=user, usertrip=usertrip)
+    user_trips = UserTrip.query.filter_by(user_id=user.user_id, role_id=driver_role.role_id).all()
+    user_rides = UserTrip.query.filter_by(user_id=user.user_id, role_id=passenger_role.role_id).all()
+    
+    return render_template("mytrips.html", user=user, user_trips=user_trips, user_rides=user_rides)
 
 # query the trips table to determine ownership of trip using role id and association with trips joined
 
