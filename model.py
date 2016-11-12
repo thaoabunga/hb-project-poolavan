@@ -30,6 +30,8 @@ class User(db.Model):
     phone_number = db.Column(db.String(20), nullable=False)
     gender = db.Column(db.String(10))
     smoking_preference = db.Column(db.String(15))
+    about_me = db.Column(db.String(140))
+    last_seen = db.Column(db.DateTime)
 
     trips = db.relationship('Trip', secondary= 'usertrips', backref='users')
 
@@ -82,6 +84,11 @@ class UserTrip(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
     request = db.Column(db.String(50), nullable=False)
+    role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
+    activity_id = db.Column(db.Integer, db.ForeignKey("activities.activity_id"), nullable=False)
+
+    usertrips_ = db.relationship('Activity', backref='usertrips')
+    # write method on how to access user's role and 
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -111,7 +118,7 @@ class Activity(db.Model):
                           autoincrement=True,
                           primary_key=True)
 
-    recreation_activity = db.Column(db.String(40), nullable=False)
+    recreation_type = db.Column(db.String(40), nullable=False)
 
 # class RideRequest(db.Model):
 #     """User ride request."""

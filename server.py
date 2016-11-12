@@ -2,16 +2,14 @@
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, redirect, session, flash
-from flask_mail import Mail, Message
 from flask_debugtoolbar import DebugToolbarExtension
-from hashlib import md5
+#from hashlib import md5
 from datetime import datetime
 
 
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
-mail = Mail(app)
 
 app.secret_key = "ABC"
 
@@ -61,7 +59,11 @@ def mytrips_detail():
     user_id = session["user_id"]
     user = User.query.get(user_id)
     usertrip = user.trips
+
     return render_template("mytrips.html", user=user, usertrip=usertrip)
+
+# query the trips table to determine ownership of trip using role id and association with trips joined
+
 
 
 @app.route("/trips") #add another activity search route, form submits to trip activity
@@ -195,6 +197,9 @@ def create_trip():
     trip_departure_at = request.form['trip_departure_at']
     trip_arrival_at = request.form['trip_arrival_at']
     car_capacity = request.form['car_capacity']
+    recreation_activity = request.form['recreation_activity']
+    role_type = request.form['role_type']
+
 
 
     new_trip = Trip(trip_name=trip_name, 
@@ -202,7 +207,10 @@ def create_trip():
                     arrival_address=arrival_address, 
                     trip_departure_at=trip_departure_at, 
                     trip_arrival_at=trip_arrival_at, 
-                    car_capacity=car_capacity)
+                    car_capacity=car_capacity,
+                    recreation_activity=recreation_activity,
+                    role_type=role_type)
+
     db.session.add(new_trip)
     db.session.flush() #gives new_trip an id in order to complete the transaction not permanent- easy access
 
