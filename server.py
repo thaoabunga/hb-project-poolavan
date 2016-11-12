@@ -5,16 +5,37 @@ from flask import Flask, render_template, request, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 #from hashlib import md5
 from datetime import datetime
-
+from flask.ext.mail import Mail, Message
 
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
 
+
+
+# administrator list
+ADMINS = ['poolavannotifications@gmail.com']
+
+mail = Mail(app)
+
+# email server
+app.config.update(
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 587,
+    MAIL_USE_SSL=False,
+    MAIL_USE_TLS=True,
+    MAIL_USERNAME = 'poolavannotifications@gmail.com',
+    MAIL_PASSWORD = 'Athena12#'
+)
 app.secret_key = "ABC"
 
 app.jinja_env.undefined = StrictUndefined
 
+def send_email(subject, sender, recipients, text_body, html_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    mail.send(msg)
 
 @app.route('/homepage')
 def hello_world():
@@ -260,12 +281,27 @@ def join_trip():
     current_user = User.query.filter_by(user_id=session['user_id']).first()
     trip_id = request.form['trip_id']
     trip = Trip.query.filter_by(trip_id=trip_id).first()
-
-    new_user_trip = UserTrip(user_id=current_user.user_id, trip_id=trip.trip_id, request='active')
+    # activity FK should be on the Trip instead.
+    user_trip = UserTrip.query.filter_by(trip_id=trip.trip_id).first()
+    # trip.activity_Id   
+    passenger_role = Role.query.filter_by(role='passenger').first()
+    new_user_trip = UserTrip(
+        user_id=current_user.user_id,
+        trip_id=trip.trip_id,
+        role_id=passenger_role.role_id, 
+        activity_id=user_trip.activity_id,
+        request='active'
+    )
 
     db.session.add_all([new_user_trip, current_user])
 
     db.session.commit()  
+    send_email("Test Email!" ,
+               ADMINS[0],
+               ['thaozers@gmail.com'],
+               "ABCD",
+               "ABCD"
+              )
     #return redirect("/trips/" + trip_id) # use url_for instead should this go to a wait for confirmation page?
     return redirect("/requestconfirmation")
 
@@ -281,6 +317,7 @@ if __name__ == "__main__":
     # that we invoke the DebugToolbarExtension
     app.debug = True
     app.config['DEBUG'] = True
+
     app.jinja_env.auto_reload = app.debug
     connect_to_db(app)
 
