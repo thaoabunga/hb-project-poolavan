@@ -82,8 +82,8 @@ def mytrips_detail():
     
     #usertrip = user.trips
     # Convert this field to Enum on the model
-    passenger_role = Role.query.filter_by(role='passenger').first()
-    driver_role = Role.query.filter_by(role='driver').first()
+    passenger_role = Role.query.filter_by(role='Passenger').first()
+    driver_role = Role.query.filter_by(role='Driver').first()
 
     user_trips = UserTrip.query.filter_by(user_id=user.user_id, role_id=driver_role.role_id).all()
     user_rides = UserTrip.query.filter_by(user_id=user.user_id, role_id=passenger_role.role_id).all()
