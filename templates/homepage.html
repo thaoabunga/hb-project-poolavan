@@ -26,11 +26,9 @@
 
 <h3>Search for like-minded travelers by activity (Under Construction)</h3>
     <p>Activity <select name="activity">
-        <option>Snow sports</option>
-        <option>Climbing</option>
-        <option>Hiking</option>
-        <option>Camping</option>
-        <option>Mountain Biking</option>
+      {% for activity in activities %}
+        <option value={{ activity.activity_id }}>{{ activity.recreation_type }}</option>
+      {% endfor %}
     </select>
     </p> <!-- need to link functionality -->
 

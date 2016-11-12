@@ -14,17 +14,16 @@
     </p>
     <p>Role: Select (1) for Driver or (2) for Passenger
     <select name="role_id">
-        <option>1</option> 
-        <option>2</option> 
+      {% for role in roles %}
+        <option value={{ role.role_id }}>{{ role.role }}</option>
+      {% endfor %}
     </select>
     </p>
     
     <p>Activity <select name="recreation_activity">
-        <option>Snow sports</option>
-        <option>Climbing</option>
-        <option>Hiking</option>
-        <option>Camping</option>
-        <option>Mountain Biking</option>
+      {% for activity in activities %}
+        <option value={{ activity.activity_id }}>{{ activity.recreation_type }}</option>
+      {% endfor %}
     </select>
     </p> 
 

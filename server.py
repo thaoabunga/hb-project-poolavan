@@ -19,8 +19,8 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/homepage')
 def hello_world():
     """Homepage."""
-
-    return render_template("homepage.html")
+    activities = Activity.query.all()
+    return render_template("homepage.html", activities=activities)
 
 
 @app.before_request
@@ -170,58 +170,64 @@ def user_login():
 
 #     return render_template("newtrip_form.html")
 
-@app.route("/createtrip")
-def createtrip_form():
-    """Show User Create trip form."""
-    return render_template("createtrip_form.html") 
-
-@app.route("/createtrip", methods=['POST']) 
+@app.route("/createtrip", methods=['GET', 'POST']) 
 def create_trip():
     """User creates a trip."""
+    if request.method == 'GET':
+        activities = Activity.query.all()
+        roles = Role.query.all()
+        return render_template(
+            "createtrip_form.html",
+             activities=activities,
+             roles=roles
+        )
+    else: 
+        #create trip form in html
+        #add current user to the trip
+        user_id = session["user_id"]
 
-    #create trip form in html
-    #add current user to the trip
-   
-    user_id = session["user_id"]
-
-    current_user = User.query.filter_by(user_id=user_id).first()
-
-
-
-    #collect all variables
-    #add to session
-    #current_user.
-    trip_name = request.form['trip_name']
-    departure_address = request.form['departure_address']
-    arrival_address = request.form['arrival_address']
-    trip_departure_at = request.form['trip_departure_at']
-    trip_arrival_at = request.form['trip_arrival_at']
-    car_capacity = request.form['car_capacity']
-    recreation_activity = request.form['recreation_activity']
-    role_type = request.form['role_type']
+        current_user = User.query.filter_by(user_id=user_id).first()
 
 
-
-    new_trip = Trip(trip_name=trip_name, 
-                    departure_address=departure_address, 
-                    arrival_address=arrival_address, 
-                    trip_departure_at=trip_departure_at, 
-                    trip_arrival_at=trip_arrival_at, 
-                    car_capacity=car_capacity,
-                    recreation_activity=recreation_activity,
-                    role_type=role_type)
-
-    db.session.add(new_trip)
-    db.session.flush() #gives new_trip an id in order to complete the transaction not permanent- easy access
-
-    new_user_trip = UserTrip(user_id=current_user.user_id, trip_id=new_trip.trip_id, request='active')
-
-    db.session.add_all([new_trip, new_user_trip, current_user])
-
-    db.session.commit()
+        #collect all variables
+        #add to session
+        #current_user.
+        trip_name = request.form['trip_name']
+        departure_address = request.form['departure_address']
+        arrival_address = request.form['arrival_address']
+        trip_departure_at = request.form['trip_departure_at']
+        trip_arrival_at = request.form['trip_arrival_at']
+        car_capacity = request.form['car_capacity']
+        activity_id = request.form['recreation_activity']
+        role_id = request.form['role_id']
 
 
-    return redirect("/homepage") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
+
+        new_trip = Trip(trip_name=trip_name, 
+                        departure_address=departure_address, 
+                        arrival_address=arrival_address, 
+                        trip_departure_at=trip_departure_at, 
+                        trip_arrival_at=trip_arrival_at, 
+                        car_capacity=car_capacity)
+
+
+        db.session.add(new_trip)
+        db.session.flush() #gives new_trip an id in order to complete the transaction not permanent- easy access
+
+        new_user_trip = UserTrip(
+            user_id=current_user.user_id,
+            trip_id=new_trip.trip_id,
+            role_id=role_id, 
+            activity_id=activity_id,
+            request='active'
+        )
+
+        db.session.add_all([new_trip, new_user_trip, current_user])
+
+        db.session.commit()
+
+
+        return redirect("/homepage") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
 
 # @app.route("/usertrip")
 # def usertrip_all():
