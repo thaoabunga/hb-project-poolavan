@@ -62,10 +62,10 @@ def before_request():
 
 ################## Render Templates
 
-@app.route('/interactive')
+@app.route('/ridesharing')
 def interactive():
     try:
-        return render_template('interactive.html')
+        return render_template('ridesharing.html')
     except Exception, e:
         return(str(e))
 
@@ -173,6 +173,9 @@ def register_new_user():
     return redirect("/")
 
 
+@app.route("/gethi", methods=['GET'])
+def hello():
+    return "Hello world!"
 
 @app.route("/login", methods=['POST'])
 def user_login():

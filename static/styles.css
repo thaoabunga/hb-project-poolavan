@@ -1,16 +1,18 @@
 body {
-  margin: 30px;
-  background-color: #ffffff;
-  font-family: 'Lato', sans-serif;
-  color: black;
-}
+    margin: 30px;
+    background-image: url('snowchicas.jpg');
+    background-size: cover;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    color: black;
+    }
+
 
 a {
   color: navy;
 }
 
 input[type='submit'] {
-  background-color: white;
+  background-color: papayawhip;
   border: none;
   color: black;
   margin: 5px;
