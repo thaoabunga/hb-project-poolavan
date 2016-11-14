@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
 <h3>Search for like-minded travelers by activity (Under Construction)</h3>
     <p>Activity <select name="activity">
       {% for activity in activities %}
@@ -24,3 +30,6 @@
 
 <h2>Suggested Carpool Locations</h2>
 <iframe src="https://www.google.com/maps/d/embed?mid=13WSKPRRgvcIs9tGW3taeL2jXVQs" width="640" height="480"></iframe>
+
+
+{% endblock %}

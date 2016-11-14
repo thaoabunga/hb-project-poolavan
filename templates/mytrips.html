@@ -8,16 +8,20 @@
 
     <div class="col-xs-12 col-lg-6">
         <p>My Trips:</p>   
-    	{% for user_trip in user_trips %} 
+    	{% for user_trip in user_trips %}
+        
         	{{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
         {% endfor %}
         <br></br>
+   
 
          <p>My Rides:</p>  
 
         {% for user_trip in user_rides %}
             {{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
         {% endfor %}
+
+
 
     </div>
 
