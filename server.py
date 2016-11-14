@@ -1,7 +1,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, redirect, session, flash, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 #from hashlib import md5
 from datetime import datetime
@@ -14,34 +14,40 @@ app = Flask(__name__)
 
 
 # administrator list
-ADMINS = ['poolavannotifications@gmail.com']
+# ADMINS = ['poolavannotifications@gmail.com']
 
-mail = Mail(app)
+# mail = Mail(app)
 
-# email server
-app.config.update(
-    MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = 587,
-    MAIL_USE_SSL=False,
-    MAIL_USE_TLS=True,
-    MAIL_USERNAME = 'poolavannotifications@gmail.com',
-    MAIL_PASSWORD = 'Athena12#'
-)
+# # email server
+# app.config.update(
+#     MAIL_SERVER = 'smtp.gmail.com',
+#     MAIL_PORT = 587,
+#     MAIL_USE_SSL=False,
+#     MAIL_USE_TLS=True,
+#     MAIL_USERNAME = 'poolavannotifications@gmail.com',
+#     MAIL_PASSWORD = 'Athena12#'
+# )
 app.secret_key = "ABC"
 
 app.jinja_env.undefined = StrictUndefined
 
-def send_email(subject, sender, recipients, text_body, html_body):
-    msg = Message(subject, sender=sender, recipients=recipients)
-    msg.body = text_body
-    msg.html = html_body
-    mail.send(msg)
+# #def send_email(subject, sender, recipients, text_body, html_body):
+#     msg = Message(subject, sender=sender, recipients=recipients)
+#     msg.body = text_body
+#     msg.html = html_body
+#     mail.send(msg)
 
-@app.route('/homepage')
+@app.route('/')
 def hello_world():
     """Homepage."""
+
+    return render_template("homepage.html")
+
+@app.route('/userhome')
+def userhome():
+    """User Homepage."""
     activities = Activity.query.all()
-    return render_template("homepage.html", activities=activities)
+    return render_template("userhome.html", activities=activities)
 
 
 @app.before_request
@@ -55,6 +61,13 @@ def before_request():
 
 
 ################## Render Templates
+
+@app.route('/interactive')
+def interactive():
+    try:
+        return render_template('interactive.html')
+    except Exception, e:
+        return(str(e))
 
 @app.route("/users")
 def user_list():
@@ -129,7 +142,7 @@ def logout():
     session['logged_in'] = False
 
     flash("Successfully logged out!")
-    return redirect("/homepage")
+    return redirect("/")
 
 
 @app.route("/register", methods=["POST"])
@@ -157,7 +170,7 @@ def register_new_user():
 
 
     # redirect to homepage
-    return redirect("/homepage")
+    return redirect("/")
 
 
 
@@ -185,12 +198,13 @@ def user_login():
         session["user_id"] = current_user.user_id
         session["logged_in"] = True
         flash("Successfully logged in!")
-        return redirect("/homepage")
+
+        return redirect("/userhome")
 
     # if username in db and password belongs to same user, redirect to homepage 
     elif current_user.password != password:
         flash("Password does not match. Please try again.")
-        return redirect("/homepage")
+        return redirect("/")
 
 # @app.route("/newtrips", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
 # def createtrip_form():
@@ -255,7 +269,7 @@ def create_trip():
         db.session.commit()
 
 
-        return redirect("/homepage") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
+        return redirect("/userhome") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
 
 # @app.route("/usertrip")
 # def usertrip_all():
@@ -284,7 +298,11 @@ def join_trip():
     # activity FK should be on the Trip instead.
     user_trip = UserTrip.query.filter_by(trip_id=trip.trip_id).first()
     # trip.activity_Id   
-    passenger_role = Role.query.filter_by(role='passenger').first()
+    passenger_role = Role.query.filter_by(role='Passenger').first()
+
+    # if passenger_role is None:
+
+
     new_user_trip = UserTrip(
         user_id=current_user.user_id,
         trip_id=trip.trip_id,
@@ -296,12 +314,12 @@ def join_trip():
     db.session.add_all([new_user_trip, current_user])
 
     db.session.commit()  
-    send_email("Test Email!" ,
-               ADMINS[0],
-               ['thaozers@gmail.com'],
-               "ABCD",
-               "ABCD"
-              )
+    # send_email("Test Email!" ,
+    #            ADMINS[0],
+    #            ['thaozers@gmail.com'],
+    #            "ABCD",
+    #            "ABCD"
+    #           )
     #return redirect("/trips/" + trip_id) # use url_for instead should this go to a wait for confirmation page?
     return redirect("/requestconfirmation")
 

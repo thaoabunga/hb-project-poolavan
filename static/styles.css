@@ -1,16 +1,16 @@
 body {
   margin: 30px;
-  background-color: #000040;
+  background-color: #ffffff;
   font-family: 'Lato', sans-serif;
-  color: white;
+  color: black;
 }
 
 a {
-  color: papayawhip;
+  color: navy;
 }
 
 input[type='submit'] {
-  background-color: papayawhip;
+  background-color: white;
   border: none;
   color: black;
   margin: 5px;

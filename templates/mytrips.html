@@ -15,8 +15,9 @@
         {% endfor %}
 
          <p>My Rides:</p>  
-        {% for user_trip in user_rides %} 
-        	{{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
+
+        {% for user_trip in user_rides %}
+            {{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
         {% endfor %}
 
     </div>

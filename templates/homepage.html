@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>PoolAVan</h1>
 
 <!-- Check session for boolean 'logged_in' -->
 <!-- If not logged in, display login form -->
 {% if not session["logged_in"] %}
+    <div id="homepage-block">
+        <h1 id="homepage-title">Poolavan</h1>
+    </div>
+
     <form action="/login" method="POST">
         <p>Username (email)  <input type="text" name="username" placeholder="Username"></p>
         <p>Password  <input type="password" name="password"  placeholder="Password"></p>
         <input type="submit" value="Log in">
         <input type="submit" value="Register">
     </form>
-    
-
-        
-
 
 <!-- If user is logged in, display logout button -->
 {% else %}    
@@ -23,34 +22,5 @@
         <input type="submit" value="Log out">
     </form>
 {% endif %}
-
-<h3>Search for like-minded travelers by activity (Under Construction)</h3>
-    <p>Activity <select name="activity">
-      {% for activity in activities %}
-        <option value={{ activity.activity_id }}>{{ activity.recreation_type }}</option>
-      {% endfor %}
-    </select>
-    </p> <!-- need to link functionality -->
-
-<h2>My Trips</h2>
-<p><a href="/mytrips">View My Trips</a></p>
-
-<h2>Trips</h2>
-<p><a href="/trips">View all trips</a></p>
-
-<h2>Users</h2>
-<p><a href="/users">View all users</a></p>
-
-<h2>New Trips</h2>
-<p><a href="/createtrip">Create a new trip</a></p>
-
-<h2>Pending Trip Requests ????</h2>
-
-
-<!-- TBD <h2>Join Others</h2>
-<p><a href="/jointrip">Join a trip</a></p> -->
-
-<h2>Suggested Carpool Locations</h2>
-<iframe src="https://www.google.com/maps/d/embed?mid=13WSKPRRgvcIs9tGW3taeL2jXVQs" width="640" height="480"></iframe>
 
 {% endblock %}
