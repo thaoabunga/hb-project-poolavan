@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1.0">
+        <title>Poolavan | Ridesharing for Adventurers. </title>
+        <meta name="description" content="poolavan is a ridesharing tool for those who are seeking to get out there.">
+        <!-- Google Recaptcha -->
+        <script type="text/javascript" async="" src="/static/ridesharing/"></script>
+        <script async="" src="/static/ridesharing/analytics.js"></script>
+        <script type="text/javascript" async="" src="/static/ridesharing/recaptcha__en.js">
+        </script><script src="/static/ridesharing/api.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        
+    <script>
+        $(document).ready(function(){
+          $("#makeajax").click(function(){
+            $.get("/gethi", function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+        // TODO process data
+    });
+});
+    
+
+});</script>
+
+        <!-- Fonts -->
+        <link href="./ridesharing/css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="/static/ridesharing/fonts.css">
+        <!-- Styles -->
+        <link href="/static/ridesharing/style.css" rel="stylesheet">
+        <link href="./ridesharing_files/css(1)" rel="stylesheet" type="text/css">
+
+    </head>
+
+
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+        <!-- Navigation -->
+       
+        <nav class="navbar navbar-custom navbar-fixed-top thedesktopnav" role="navigation">
+            <div class="container clearfix">
+                <aside class="pull-right thelogin">
+                    <ul class="theloginbuttonwrapper">
+                        <li class="auth-button">
+                            <a class="withripple loginlink" href="https://poolavan.com/#" data-toggle="modal" data-target="#login-modal" rollapp-href="https://ridesharing/#">
+                            <img src="./ridesharing_files/usericon.png" alt="login icon"> LOG IN
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+            <ul class="thelinks">
+                <li>
+                    <a class="page-scroll withripple" href="https://poolavan/#about" rollapp-href="https://poolavan.com/#about">How Poolavan Works</a>
+                </li>
+                <li>
+                    <a class="page-scroll withripple" href="https://poolavan/#features" rollapp-href="https://poolavan.com/#features">Why Poolavan?</a>
+                </li>
+                <li>
+                    <a class="page-scroll withripple" href="https://poolavan/#register" rollapp-href="https://poolavan.com/#register">Join Poolavan</a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="navbar navbar-custom navbar-fixed-top themobilenav" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        <li class="hidden">
+                            <a href="https://poolavan.com/#page-top" rollapp-href="https://poolavan/#page-top"></a>
+                        </li>
+                        <li>
+                            <a class="page-scroll withripple" href="https://poolavan/#about" rollapp-href="https://poolavan/#about">How Poolavan Works</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll withripple" href="https://poolavan/#features" rollapp-href="https://poolavan/#features">Why Poolavan?</a>
+                        </li>
+                        <li class="auth-button">
+                            <a class="withripple" href="https://poolavan/#" data-toggle="modal" data-target="#login-modal" rollapp-href="https://poolavan/#">Log In</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <!-- Intro Header -->
+        <header class="intro" data-stellar-background-ratio="0.2" data-stellar-vertical-offset="100" style="background-position: 50% 100%;">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="brand-heading">Share the journey.</h1>
+                            <p class="intro-text">Poolavan is ride-sharing platform for adventurers.</p>
+                            <a href="https://poolavan/#networks" class="btn btn-primary btn-raised btn-lg page-scroll" rollapp-href="https://poolavan/#networks">
+                                Find Your People
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header> <!-- TODO -->
+        <section class="purplebg text-center" style="padding:3em 0 1em;">
+            <div class="container">
+                <p>
+                    Adventurers and nature-lovers connect through a network to carpool to the same destination, reducing their carbon-footprint and travel costs.
+                </p>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section id="about" class="container content-section">
+            <h2>How Poolavan works</h2>
+            <img src="./Zimride by Enterprise _ Private Network ridesharing_files/house.png" style="display:block;margin:0 auto;" width="260" alt="Starting Location">
+            <div class="steps">
+                <div class="step activeicon active" id="step1">
+                    <div class="block right text">
+                        <strong>Create a profile.</strong><br>
+                        Join like-minded individuals by creating a secure profile.
+                    </div>
+                    <div class="block img">
+                        <div class="theimg">
+
+                        </div>
+                    </div>
+                    <div class="block left blank">
+                    </div>
+                </div>
+                <div class="step active" id="step2">
+                    <div class="block right blank">
+                    </div>
+                    <div class="block img">
+                        <div class="theimg">
+
+                        </div>
+                    </div>
+                    <div class="block left text">
+                        <strong>Search for existing trips or riders.</strong><br>
+                        Tell us where you need to go.
+                    </div>
+                </div>
+                <div class="step active" id="step3">
+                    <div class="block right text">
+                        <strong>Join a trip.</strong><br>
+                        Get outside with your people.
+                    </div>
+                    <div class="block img">
+                        <div class="theimg">
+
+                        </div>
+                    </div>
+                    <div class="block left blank">
+                    </div>
+                </div>
+                <div class="step active" id="step4">
+                    <div class="block right blank">
+                    </div>
+                    <div class="block img">
+                        <div class="theimg">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                    <div class="block img">
+                        <div class="theimg">
+
+                        </div>
+                    </div>
+                    <div class="block left blank">
+                    </div>
+                </div>
+            </div>
+            <img src="./Zimride by Enterprise _ Private Network ridesharing_files/house2.png" style="display:block;margin:0 auto; padding-top:2em; background:#fff;" width="260" alt="Ending Location">
+        </section>
+        <!-- Contact Section -->
+        <section id="features" class="content-section text-center life-section" data-stellar-background-ratio="0.2" data-stellar-vertical-offset="230" style="background-position: 50% 100%;">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="brand-heading">More rides. More experiences.</h1>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="learn-more" class="container content-section text-center">
+            <div id="corp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Poolavan benefits</h2>
+                        <p>
+                            We bring people together to play in the great outdoors.
+                        </p>
+                    </div>
+                </div>
+                <div class="row text-left clearfix">
+                    <div class="pull-left left">
+                        <h3>Low Cost &amp; High Impact Solution</h3>
+                        <ul>
+                            <li>Relieves parking congestion </li>
+                            <li>Reduces carbon footprint, improves sustainability</li>
+                            <li>Increases employee productivity and promotes wellness</li>
+                            <li>Provides a recruiting and retention benefit</li>
+                            <li>Offers a solution for office relocation</li>
+                        </ul>
+                    </div>
+                    <div class="pull-left right">
+                        <h3>Easy to Implement</h3>
+                        <ul>
+                            <li>Key statistics to report savings, activity and growth</li>
+                            <li>A fully hosted, private solution with email or single-sign on authentication </li>
+                            <li>A dedicated rideshare specialist</li>
+                            <li>Extensive marketing support</li>
+                            <li>A clean and easy user interface</li>
+                            <li>Co-branding opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="uni">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Zimride benefits universities</h2>
+                        <p>
+                            Zimride not only improves the quality of student life –  offering students a way to save time and money, to meet new people and an easy solution for traveling home for the holidays or weekend trips – but it also benefits the university itself.
+                        </p>
+                    </div>
+                </div>
+                <div class="row text-left">
+                    <div class="col-md-6 left">
+                        <h3>Low Cost &amp; High Impact Solution</h3>
+                        <ul>
+                            <li>Reduces campus traffic</li>
+                            <li>Reduces infrastructure costs and parking congestion</li>
+                            <li>Reduces carbon footprint, improves sustainability</li>
+                            <li>Offers a unique benefit for students and faculty to improve recruiting and retention</li>
+                            <li>Complements shuttles, bike and car sharing programs</li>
+                            <li>Fosters a stronger sense of community</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 right">
+                        <h3>Easy to Implement</h3>
+                        <ul>
+                            <li>Key statistics to report savings, activity and growth</li>
+                            <li>A fully hosted, private solution with email or single-sign on authentication </li>
+                            <li>A dedicated rideshare specialist</li>
+                            <li>Extensive marketing support</li>
+                            <li>A clean and easy user interface</li>
+                            <li>Co-branding opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+ <div style="z-index:9999" id="makeajax"> Make a Ajax call to server </div>
+
+       
+        </footer>
+
+       
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+
+        <!-- Include all compiled scripts -->
+        <script src="/ridesharing_files/all.js"></script>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-44705505-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lte IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script type="text/javascript">
+//<![CDATA[
+(function() {
+var _analytics_scr = document.createElement('script');
+_analytics_scr.type = 'text/javascript'; _analytics_scr.async = true; _analytics_scr.src = '/_Incapsula_Resource?SWJIYLWA=2977d8d74f63d7f8fedbea018b7a1d05&ns=1';
+var _analytics_elem = document.getElementsByTagName('script')[0]; _analytics_elem.parentNode.insertBefore(_analytics_scr, _analytics_elem);
+})();
+// ]]>
+</script>
+
+</body></html>
