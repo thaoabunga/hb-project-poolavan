@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>Trip Details</h2>
+    
+            <p>Trip: {{ trip.trip_name }}</p>
+
+            <p>Origin: {{ trip.departure_address }}</p>
+            <p>Arrival: {{ trip.arrival_address }}</p>
+            <p>Departure Time: {{ trip.trip_departure_at }}</p>
+            <p>Arrival Time: {{ trip.trip_arrival_at }}</p>
+            <p>Car Capacity: {{ trip.car_capacity }}</p>
+
+{% endblock %}
