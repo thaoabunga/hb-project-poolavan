@@ -214,7 +214,16 @@ def user_login():
 
 #     return render_template("newtrip_form.html")
 
-@app.route("/activity", methods =['POST'])
+
+@app.route("/activity", methods=["GET"])
+def activities_form():
+    """Displays user's activities."""
+
+    user_id = session["user_id"]
+    user = User.query.get(user_id)
+    return render_template("activity.html", user_id=user_id, user=user) 
+
+@app.route("/activity/<int:activity_id>", methods =['POST'])
 def activities_list():
     """User views all users' with similar activities."""
 
@@ -224,10 +233,9 @@ def activities_list():
     activity_id = request.form['recreation_activity']
     activity = Activity.query.get(activity_id)
 
-    user_activity = UserTrip.query.filter_by(user_id=user.user_id, recreation_activity=activity.activity_id)
-    print user_activity
-    pass
-    # return render_template("activity.html", user_id=user_id, recreation_activity=recreation_activity)
+    user_activity = UserTrip.query.filter_by(user_id=user.user_id, activity_id=activity.activity_id)
+    
+    return render_template("activity.html", user_id=user_id, activity_id=activity_id)
 
 
 @app.route("/createtrip", methods=['GET', 'POST']) 

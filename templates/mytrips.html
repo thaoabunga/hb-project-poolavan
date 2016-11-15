@@ -11,9 +11,9 @@
         <h2>My Profile</h2>
 
         <h2>My Calendar</h2>
-        <h2>My Maps</h2>
 
-        <p>My Trips:</p>   
+
+        <p><h2>My Trips:</h2></p>   
         {% for user_trip in user_trips %}
         <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
         {{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
@@ -21,7 +21,7 @@
         {% endfor %}
 
 
-         <p>My Rides:</p>  
+         <p><h2>My Rides:</h2></p>  
 
         {% for user_trip in user_rides %}
         <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
