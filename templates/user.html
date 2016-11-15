@@ -8,13 +8,12 @@
 
     <div class="col-xs-12 col-lg-6">
         <p>Name: {{ user.first_name }}</p>
-
         <p>Phone Number: {{ user.phone_number }}</p>
         <p>Email: {{ user.username }}</p>
         <p>Gender: {{ user.gender }}</p>
         <p>Smoking Preference: {{ user.smoking_preference }}</p>
-        <p>Current User Trips:   {% for trip in usertrip %} 
-              {{ trip.trip_name }} ({{ trip.trip_id }})</p>
+        <p>Current User Trips: {% for trip in usertrip %}</p> 
+        <p>{{ trip.trip_name }} ({{ trip.trip_id }})</p>
     </div>
     {% endfor %}
   {% endblock %}

@@ -43,7 +43,7 @@ def hello_world():
 
     return render_template("homepage.html")
 
-@app.route('/userhome', methods=["POST"])
+@app.route('/userhome', methods=['GET', 'POST'])
 def userhome():
     """User Homepage."""
     activities = Activity.query.all()
@@ -64,10 +64,9 @@ def before_request():
 
 @app.route('/ridesharing')
 def interactive():
-    try:
+
         return render_template('ridesharing.html')
-    except Exception, e:
-        return(str(e))
+
 
 @app.route("/users")
 def user_list():
@@ -208,36 +207,32 @@ def user_login():
     elif current_user.password != password:
         flash("Password does not match. Please try again.")
     
-        return redirect("/userhome")
-
-# @app.route("/newtrips", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
-# def createtrip_form():
-#     """Display new trips."""
-
-#     return render_template("newtrip_form.html")
+        return redirect("/")
 
 
 @app.route("/activity", methods=["GET"])
 def activities_form():
     """Displays user's activities."""
 
-    user_id = session["user_id"]
-    user = User.query.get(user_id)
-    return render_template("activity.html", user_id=user_id, user=user) 
+    usertrip = UserTrip.query.all()
+    users = User.query.all()
+    activities = Activity.query.all()
 
-@app.route("/activity/<int:activity_id>", methods =['POST'])
+
+    return render_template("activity.html", usertrip=usertrip, users= users, activities=activities)
+
+
+@app.route("/activity/<int:activity_id>", methods =['GET','POST'])
 def activities_list():
     """User views all users' with similar activities."""
 
 
-    user_id = session["user_id"]
-    user = User.query.get(user_id) 
-    activity_id = request.form['recreation_activity'] #TODO: THIS IS WHERE I'M GETTING MY 404 ERROR
-    activity = Activity.query.get(activity_id)
-
-    user_activity = UserTrip.query.filter_by(user_id=user.user_id, activity_id=activity.activity_id)
+    # activity = Activity.query.get(activity_id)
+    users = User.query.get(user_id)
+    usertrip = user.trips
+    # activity=activity, user=user, usertrip=usertrip)
     
-    return render_template("activity.html", user_id=user_id, activity_id=activity_id, user_activity=user_activity)
+    return render_template("activity.html", users=users, usertrip=usertrip)
 
 
 @app.route("/createtrip", methods=['GET', 'POST']) 
@@ -299,22 +294,6 @@ def create_trip():
 
         return redirect("/userhome") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
 
-# @app.route("/usertrip")
-# def usertrip_all():
-#     """Show users within the same location and activity."""
-
-#     user = User.query.get(user_id)
-#     usertrip = user.trips.departure_address
-#     #usertrip = User.trips
-#     #return render_template("user.html", user=user)
-#     return render_template("usertrip_list.html", user=user, usertrip=usertrip)
-
-# @app.route("/usertrip/" + user_trip_id)
-# def usertrip_all():
-#     """Show usertrips details."""
-
-#     UserTrip = UserTrip.query.get(user_trip_id)
-#     return render_template("trip.html", trip=trip)
 
 @app.route("/jointrip", methods=['POST'])
 def join_trip():
@@ -361,8 +340,8 @@ def confirmation_form():
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # # that we invoke the DebugToolbarExtension
-    # app.debug = True
-    # app.config['DEBUG'] = True
+    app.debug = True
+    app.config['DEBUG'] = True
 
     app.jinja_env.auto_reload = app.debug
     connect_to_db(app)
@@ -370,4 +349,4 @@ if __name__ == "__main__":
     # # Use the DebugToolbar
     # DebugToolbarExtension(app)
 
-    app.run(port=5000, host="0.0.0.0", debug=True)
+    app.run(port=5000, host="0.0.0.0")
