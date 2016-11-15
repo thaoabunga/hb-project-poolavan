@@ -176,6 +176,7 @@ def register_new_user():
 def hello():
     return "Hello world!"
 
+
 @app.route("/login", methods=['POST'])
 def user_login():
     """User login"""
@@ -206,6 +207,7 @@ def user_login():
     # if username in db and password belongs to same user, redirect to homepage 
     elif current_user.password != password:
         flash("Password does not match. Please try again.")
+    
         return redirect("/userhome")
 
 # @app.route("/newtrips", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
@@ -229,13 +231,13 @@ def activities_list():
 
 
     user_id = session["user_id"]
-    user = User.query.get(user_id)
-    activity_id = request.form['recreation_activity']
+    user = User.query.get(user_id) 
+    activity_id = request.form['recreation_activity'] #TODO: THIS IS WHERE I'M GETTING MY 404 ERROR
     activity = Activity.query.get(activity_id)
 
     user_activity = UserTrip.query.filter_by(user_id=user.user_id, activity_id=activity.activity_id)
     
-    return render_template("activity.html", user_id=user_id, activity_id=activity_id)
+    return render_template("activity.html", user_id=user_id, activity_id=activity_id, user_activity=user_activity)
 
 
 @app.route("/createtrip", methods=['GET', 'POST']) 
