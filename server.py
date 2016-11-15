@@ -214,18 +214,20 @@ def user_login():
 
 #     return render_template("newtrip_form.html")
 
-@app.route("/activity", methods =['GET', 'POST'])
+@app.route("/activity", methods =['POST'])
 def activities_list():
     """User views all users' with similar activities."""
+
 
     user_id = session["user_id"]
     user = User.query.get(user_id)
     activity_id = request.form['recreation_activity']
     activity = Activity.query.get(activity_id)
 
-    user_activity = UserTrip.query.filter_by(user_id=user.user_id, recreation_activity=activity.recreation_activity)
-
-    return render_template("activity.html", user_id=user_id, recreation_activity=recreation_activity)
+    user_activity = UserTrip.query.filter_by(user_id=user.user_id, recreation_activity=activity.activity_id)
+    print user_activity
+    pass
+    # return render_template("activity.html", user_id=user_id, recreation_activity=recreation_activity)
 
 
 @app.route("/createtrip", methods=['GET', 'POST']) 
@@ -348,14 +350,14 @@ def confirmation_form():
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
-    # that we invoke the DebugToolbarExtension
-    app.debug = True
-    app.config['DEBUG'] = True
+    # # that we invoke the DebugToolbarExtension
+    # app.debug = True
+    # app.config['DEBUG'] = True
 
     app.jinja_env.auto_reload = app.debug
     connect_to_db(app)
 
-    # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # # Use the DebugToolbar
+    # DebugToolbarExtension(app)
 
-    app.run(port=5000, host="0.0.0.0")
+    app.run(port=5000, host="0.0.0.0", debug=True)
