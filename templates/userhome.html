@@ -2,14 +2,20 @@
 {% block content %}
 
 
-
-
-<h3>Search for like-minded travelers by activity (Under Construction)</h3>
-    <p>Activity <select name="activity">
-      {% for activity in activities %}
+<h3>Search for like-minded travelers by activity </h3>
+    <p>Activity 
+       <form action="/activity" method="GET">
+        <select name="activity">
+        {% for activity in activities %}
         <option value={{ activity.activity_id }}>{{ activity.recreation_type }}</option>
-      {% endfor %}
-    </select>
+      {% endfor %}        
+
+      <input type="submit" value="Submit">
+     
+     </select></form>
+   
+
+
     </p> <!-- need to link functionality -->
 
 <h2>My Trips</h2>

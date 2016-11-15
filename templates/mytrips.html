@@ -7,18 +7,21 @@
 <div class="row">
 
     <div class="col-xs-12 col-lg-6">
+
         <p>My Trips:</p>   
-    	{% for user_trip in user_trips %}
-        
-        	{{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
+        {% for user_trip in user_trips %}
+        <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
+        {{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
+        </li></a>
         {% endfor %}
-        <br></br>
-   
+
 
          <p>My Rides:</p>  
 
         {% for user_trip in user_rides %}
+        <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
             {{ user_trip.trip.trip_name }} ({{ user_trip.trip.trip_id }})
+        </li></a>
         {% endfor %}
 
 

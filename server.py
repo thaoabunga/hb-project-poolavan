@@ -43,7 +43,7 @@ def hello_world():
 
     return render_template("homepage.html")
 
-@app.route('/userhome')
+@app.route('/userhome', methods=["POST"])
 def userhome():
     """User Homepage."""
     activities = Activity.query.all()
@@ -86,7 +86,7 @@ def user_detail(user_id):
     #return render_template("user.html", user=user)
     return render_template("user.html", user=user, usertrip=usertrip)
 
-@app.route("/mytrips") #TODO 
+@app.route("/mytrips") 
 def mytrips_detail():
     """Show trips created by user."""
 
@@ -103,9 +103,12 @@ def mytrips_detail():
     
     return render_template("mytrips.html", user=user, user_trips=user_trips, user_rides=user_rides)
 
-# query the trips table to determine ownership of trip using role id and association with trips joined
+@app.route("/mytrips/<int:trip_id>",methods=['GET'])
+def my_tripsdetail(trip_id):
+    """Show trip details for user."""
 
-
+    trip = Trip.query.get(trip_id)
+    return render_template("mytripsdetail.html", trip=trip)
 
 @app.route("/trips") #add another activity search route, form submits to trip activity
 def trip_list():
@@ -121,10 +124,6 @@ def trip_detail(trip_id):
 
     trip = Trip.query.get(trip_id)
     return render_template("trip.html", trip=trip)
-
-# if car capacity not at max, request to join a trip?
-# filter car capacity ? find a way to update car capacity as users are added, removed, and max cap is reached
-
 
 
 @app.route("/register", methods=["GET"])
@@ -214,6 +213,20 @@ def user_login():
 #     """Display new trips."""
 
 #     return render_template("newtrip_form.html")
+
+@app.route("/activity", methods =['GET', 'POST'])
+def activities_list():
+    """User views all users' with similar activities."""
+
+    user_id = session["user_id"]
+    user = User.query.get(user_id)
+    activity_id = request.form['recreation_activity']
+    activity = Activity.query.get(activity_id)
+
+    user_activity = UserTrip.query.filter_by(user_id=user.user_id, recreation_activity=activity.recreation_activity)
+
+    return render_template("activity.html", user_id=user_id, recreation_activity=recreation_activity)
+
 
 @app.route("/createtrip", methods=['GET', 'POST']) 
 def create_trip():
@@ -323,7 +336,7 @@ def join_trip():
     #            "ABCD",
     #            "ABCD"
     #           )
-    #return redirect("/trips/" + trip_id) # use url_for instead should this go to a wait for confirmation page?
+    # return redirect("/trips/" + trip_id) # use url_for instead should this go to a wait for confirmation page?
     return redirect("/requestconfirmation")
 
 @app.route("/requestconfirmation")
