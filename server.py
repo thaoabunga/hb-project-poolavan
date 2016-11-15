@@ -206,7 +206,7 @@ def user_login():
     # if username in db and password belongs to same user, redirect to homepage 
     elif current_user.password != password:
         flash("Password does not match. Please try again.")
-        return redirect("/")
+        return redirect("/userhome")
 
 # @app.route("/newtrips", methods=['GET']) #get will go into flask to id route and will call createtrip_form.html, a resource is being returned via the url
 # def createtrip_form():
