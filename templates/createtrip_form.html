@@ -9,12 +9,9 @@
     <p>Origin <input type="text" name="departure_address"></p>
     <p>Arrival <input type="text" name="arrival_address"></p>
 
-    <p>Departure at <form action="#" method="post">
-    {{ form.dt (class_='datepicker') }}
-    {{ form.hidden_tag() }}
-    <input type="submit"/></form></p>
+    <p>Departure at <input type="text" class='date' id="departure" name="trip_departure_at"></p>
 
-    <p>Arrival at <input type="text" name="trip_arrival_at"></p>
+    <p>Arrival at <input type="text" class='date' id="arrival" name="trip_arrival_at"></p>
     <p>Car Capacity <input type="integer" name="car_capacity"></p>
     </p>
     <p>Role: 
@@ -39,5 +36,10 @@
     <p><input type="submit" value="Ahoy!"></p>
 </form>
 
+<script>
 
+ $(function () {
+                $('#departure').datetimepicker();
+            });
+</script>
 {% endblock %}  

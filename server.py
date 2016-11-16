@@ -199,6 +199,7 @@ def user_login():
     elif current_user and current_user.password == password:
         # store username in Flask session
         session["user_id"] = current_user.user_id
+        session['username'] = current_user.first_name
         session["logged_in"] = True
         flash("Successfully logged in!")
 
@@ -222,17 +223,6 @@ def activities_form():
     return render_template("activity.html", users=users, activities=activities, activity_id=activity_id)
 
 
-# @app.route("/activity/<int:activity_id>", methods =['GET','POST'])
-# def activities_list():
-#     """User views all users' with similar activities."""
-
-#     users = User.query.get(user_id)
-#     usertrip_list = user.trips
-
-
-#     return render_template("activity.html", usertrip_list=usertrip_list)
-
-
 @app.route("/createtrip", methods=['GET', 'POST']) 
 def create_trip():
     """User creates a trip."""
@@ -245,16 +235,9 @@ def create_trip():
              roles=roles
         )
     else: 
-        #create trip form in html
-        #add current user to the trip
+
         user_id = session["user_id"]
-
         current_user = User.query.filter_by(user_id=user_id).first()
-
-
-        #collect all variables
-        #add to session
-        #current_user.
         trip_name = request.form['trip_name']
         departure_address = request.form['departure_address']
         arrival_address = request.form['arrival_address']
@@ -264,6 +247,7 @@ def create_trip():
         activity_id = request.form['recreation_activity']
         role_id = request.form['role_id']
 
+        trip_dt= trip_departure_at.strptime("")
 
 
         new_trip = Trip(trip_name=trip_name, 
@@ -290,7 +274,7 @@ def create_trip():
         db.session.commit()
 
 
-        return redirect("/userhome") # TODO: redirect to users within the same loc and activity (list of matching ride requests)
+        return redirect("/userhome") 
 
 
 @app.route("/jointrip", methods=['POST'])
@@ -336,15 +320,11 @@ def confirmation_form():
     
 
 if __name__ == "__main__":
-    # We have to set debug=True here, since it has to be True at the point
-    # # that we invoke the DebugToolbarExtension
+
     app.debug = True
     app.config['DEBUG'] = True
 
     app.jinja_env.auto_reload = app.debug
     connect_to_db(app)
-
-    # # Use the DebugToolbar
-    # DebugToolbarExtension(app)
 
     app.run(port=5000, host="0.0.0.0")

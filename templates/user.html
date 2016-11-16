@@ -12,7 +12,8 @@
         <p>Email: {{ user.username }}</p>
         <p>Gender: {{ user.gender }}</p>
         <p>Smoking Preference: {{ user.smoking_preference }}</p>
-        <p>Current User Trips: {% for trip in usertrip %}</p> 
+        <p>Current User Trips: 
+            {% for trip in usertrip %}</p> 
         <p>{{ trip.trip_name }} ({{ trip.trip_id }})</p>
     </div>
     {% endfor %}

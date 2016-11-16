@@ -47,6 +47,8 @@ function viewAllTrips(results)
 
 <!-- If user is logged in, display logout button -->
 {% else %}    
+
+{{ session["username"] }}
     <form action="/logout" method="POST">
         <input type="submit" value="Log out">
     </form>
