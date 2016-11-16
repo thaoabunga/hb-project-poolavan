@@ -38,6 +38,8 @@ function viewAllTrips(results)
         <h1 id="homepage-title">Poolavan</h1>
     </div>
 
+
+
     <form action="/login" method="POST">
         <p>Username (email)  <input type="text" name="username" placeholder="Username"></p>
         <p>Password  <input type="password" name="password"  placeholder="Password"></p>
@@ -48,7 +50,6 @@ function viewAllTrips(results)
 <!-- If user is logged in, display logout button -->
 {% else %}    
 
-{{ session["username"] }}
     <form action="/logout" method="POST">
         <input type="submit" value="Log out">
     </form>

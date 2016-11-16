@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h2>Hello, {{ session["username"] }}</h2>
+
+
 <h3>Search for like-minded travelers by activity </h3>
     <p>Activity 
        <form action="/usertrip" method="GET">

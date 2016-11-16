@@ -5,10 +5,7 @@
 
 <div class="col-xs-12 col-lg-6">
 
-        <h2>My Profile</h2>
-
-        <h2>My Calendar</h2>
-
+        <center><h2>My Profile</h2></center>
 
         <p><h2>My Trips:</h2></p>   
         {% for user_trip in user_trips %}
@@ -120,16 +117,14 @@
     </style>
   </head>
   <body>
-    <h2>Calculate your route</h2>
+    <h2>Get Trip Directions</h2>
     <form id="calculate-route" name="calculate-route" action="#" method="get">
       <label for="from">From:</label>
       <input type="text" id="from" name="from" required="required" placeholder="An address" size="30" />
-      <a id="from-link" href="#">Get my position</a>
       <br />
 
       <label for="to">To:</label>
       <input type="text" id="to" name="to" required="required" placeholder="Another address" size="30" />
-      <a id="to-link" href="#">Get my position</a>
       <br />
 
       <input type="submit" />
