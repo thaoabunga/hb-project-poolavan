@@ -93,9 +93,9 @@ class UserTrip(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        s = "<UserTrip user_trip_id=%s user_id=%s trip_id=%s request=%s>"
+        s = "<UserTrip user_trip_id=%s user_id=%s trip_id=%s request=%s role_id=%s, activity_id=%s>"
         return s % (self.user_trip_id, self.user_id, self.trip_id,
-                    self.request)
+                    self.request, self.role_id, self.activity_id)
 
 
 

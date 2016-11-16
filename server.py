@@ -2,6 +2,8 @@
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
+from flask_wtf import form
+from wtforms.fields.html5 import DateField
 from flask_debugtoolbar import DebugToolbarExtension
 #from hashlib import md5
 from datetime import datetime
@@ -11,6 +13,8 @@ from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
 
+# class Form(Form):
+#     dt = DateField('DatePicker', format = %m/%d/%y %H:%M)
 
 
 # administrator list
@@ -171,9 +175,6 @@ def register_new_user():
     return redirect("/")
 
 
-@app.route("/gethi", methods=['GET'])
-def hello():
-    return "Hello world!"
 
 
 @app.route("/login", methods=['POST'])
@@ -210,29 +211,26 @@ def user_login():
         return redirect("/")
 
 
-@app.route("/activity", methods=["GET"])
+@app.route("/usertrip", methods=["GET"])
 def activities_form():
-    """Displays user's activities."""
+    """Displays users' activities."""
 
-    usertrip = UserTrip.query.all()
+
     users = User.query.all()
-    activities = Activity.query.all()
+    activity_id = request.args.get('activity_id')
+    activities = UserTrip.query.filter_by(activity_id=activity_id).all()
+    return render_template("activity.html", users=users, activities=activities, activity_id=activity_id)
 
 
-    return render_template("activity.html", usertrip=usertrip, users= users, activities=activities)
+# @app.route("/activity/<int:activity_id>", methods =['GET','POST'])
+# def activities_list():
+#     """User views all users' with similar activities."""
+
+#     users = User.query.get(user_id)
+#     usertrip_list = user.trips
 
 
-@app.route("/activity/<int:activity_id>", methods =['GET','POST'])
-def activities_list():
-    """User views all users' with similar activities."""
-
-
-    # activity = Activity.query.get(activity_id)
-    users = User.query.get(user_id)
-    usertrip = user.trips
-    # activity=activity, user=user, usertrip=usertrip)
-    
-    return render_template("activity.html", users=users, usertrip=usertrip)
+#     return render_template("activity.html", usertrip_list=usertrip_list)
 
 
 @app.route("/createtrip", methods=['GET', 'POST']) 

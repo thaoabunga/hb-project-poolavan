@@ -7,8 +7,13 @@
 <form action="/createtrip" method= "POST">
     <p>Trip Name <input type="text" name="trip_name"></p>
     <p>Origin <input type="text" name="departure_address"></p>
-    <p>Arrival <input type="text" name="arrival_address"></p> 
-    <p>Departure at <input type="text" name="datetime" id="datetime"></input></p>
+    <p>Arrival <input type="text" name="arrival_address"></p>
+
+    <p>Departure at <form action="#" method="post">
+    {{ form.dt (class_='datepicker') }}
+    {{ form.hidden_tag() }}
+    <input type="submit"/></form></p>
+
     <p>Arrival at <input type="text" name="trip_arrival_at"></p>
     <p>Car Capacity <input type="integer" name="car_capacity"></p>
     </p>

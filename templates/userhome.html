@@ -4,10 +4,10 @@
 
 <h3>Search for like-minded travelers by activity </h3>
     <p>Activity 
-       <form action="/activity" method="GET">
-        <select name="activity">
-        {% for activity in activities %}
-        <option value={{ activity.activity_id }}>{{ activity.recreation_type }}</option>
+       <form action="/usertrip" method="GET">
+        <select name="activity_id">
+        {% for _ in activities %}
+        <option value={{ _.activity_id }}>{{ _.recreation_type }}</option>
       {% endfor %}        
 
       <input type="submit" value="Submit">

@@ -3,8 +3,15 @@
 
 <h2>Users who share your outdoor activities</h2>
 
-<h2>TEST</h2>
 
-{{ user }}
 
-    {% endblock %}
+
+{% for activity in activities %}
+
+    <h3>User: {{ activity.user_id }}</h3> 
+
+{% endfor %}
+
+{% endblock %}
+
+
