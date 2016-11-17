@@ -1,47 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Hello, {{ session["username"] }}</h2>
-
-    <form action="/logout" method="POST">
+    <form id="logout" action="/logout" method="POST">
         <input type="submit" value="Log out">
     </form>
+    <div id="greeting">Hello, {{ session["username"] }}</div>
+    <div id="avatar"></div>
 
+<div id="content">
+  <h3>Search for like-minded travelers by activity </h3>
+      <p>Activity 
+         <form action="/usertrip" method="GET">
+          <select name="activity_id">
+          {% for _ in activities %}
+          <option value={{ _.activity_id }}>{{ _.recreation_type }}</option>
+          {% endfor %}        
 
-<h3>Search for like-minded travelers by activity </h3>
-    <p>Activity 
-       <form action="/usertrip" method="GET">
-        <select name="activity_id">
-        {% for _ in activities %}
-        <option value={{ _.activity_id }}>{{ _.recreation_type }}</option>
-      {% endfor %}        
-
-      <input type="submit" value="Submit">
+        <input type="submit" value="Submit">
+      
+       </select></form>
      
-     </select></form>
-   
 
 
-    </p> <!-- need to link functionality -->
+      </p> <!-- need to link functionality -->
 
-<h2>My Trips</h2>
-<p><a href="/mytrips">View My Trips</a></p>
+  <h2>My Trips</h2>
+  <p><a href="/mytrips">View My Trips</a></p>
 
-<h2>Trips</h2>
-<p><a href="/trips">View all trips</a></p>
+  <h2>Trips</h2>
+  <p><a href="/trips">View all trips</a></p>
 
-<h2>Users</h2>
-<p><a href="/users">View all users</a></p>
+  <h2>Users</h2>
+  <p><a href="/users">View all users</a></p>
 
-<h2>New Trips</h2>
-<p><a href="/createtrip">Create a new trip</a></p>
-
-
-<!-- TBD <h2>Join Others</h2>
-<p><a href="/jointrip">Join a trip</a></p> -->
-
-<h2>Suggested Carpool Locations</h2>
-<iframe src="https://www.google.com/maps/d/embed?mid=13WSKPRRgvcIs9tGW3taeL2jXVQs" width="640" height="480"></iframe>
+  <h2>New Trips</h2>
+  <p><a href="/createtrip">Create a new trip</a></p>
 
 
+  <!-- TBD <h2>Join Others</h2>
+  <p><a href="/jointrip">Join a trip</a></p> -->
+
+  <h2>Suggested Carpool Locations</h2>
+  <iframe src="https://www.google.com/maps/d/embed?mid=13WSKPRRgvcIs9tGW3taeL2jXVQs" width="440" height="280"></iframe>
+
+  <h2>Suggested Slacklining Bay Area Locations</h2>
+  <iframe src="https://www.google.com/maps/d/embed?mid=1yxpiz1ooxVP_rJD_5zkPGEC6Wm4" width="440" height="280"></iframe>
+
+  <div id="weather"></div>
+  <button class="js-geolocation" style="display: none;">Use Your Location</button>
+</div>
 {% endblock %}

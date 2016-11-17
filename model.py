@@ -2,19 +2,15 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Table
+from datetime import datetime 
 
 
 db = SQLAlchemy()
 
+# dtDate = datetime.datetime.strptime(sDate, "%A, %d. %B %Y %I:%M%p")
+
 #####################################################################
 # Model definitions
-# user_trip_table = Table('user_trip', Base.metadata,
-#     Column('user_id', Integer, ForeignKey('user.id')),
-# #     Column('trip_id', Integer, ForeignKey('trip.id')))
-
-# usertrips = db.Table('user_trips',
-#     db.Column('user_id', db.Integer, db.ForeignKey('users.user_id')),
-#     db.Column('trip_id', db.Integer, db.ForeignKey('trips.trip_id')))
 
 class User(db.Model):
     """User of PoolaVan website."""
@@ -59,7 +55,9 @@ class Trip(db.Model):
     arrival_address = db.Column(db.String(50), nullable=False)
     trip_departure_at = db.Column(db.DateTime, nullable=False)
     trip_arrival_at = db.Column(db.DateTime, nullable=False)
-    car_capacity = db.Column(db.Integer, nullable=False)    
+    car_capacity = db.Column(db.Integer, nullable=False)
+    # dtdeparture_at = datetime.datetime.strptime(sDate, "%A, %d. %B %Y %I:%M%p")
+    # dtarrival_at = datetime.datetime.strptime(sDate, "%A, %d. %B %Y %I:%M%p")
 
     def __repr__(self):
         """Provide helpful representation when printed."""

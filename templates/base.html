@@ -11,21 +11,18 @@
 
   <!-- Bootstrap Core CSS -->
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet"  type="text/css" href="/static/styles.css">
 
     <!-- Bootstrap and Custom JS -->
     <script async defer src="https://apis.google.com/js/platform.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <link href="/static/scrolling-nav.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet"  type="text/css" href="/static/styles.css">
 </head>
 
-
-
-    
 {% with messages = get_flashed_messages() %}
   {% for message in messages %}
       <div class="alert alert-warning">{{ message }}</div>
@@ -33,7 +30,26 @@
 {% endwith %}
 
 <body> 
-  {% block content %} put your content here {% endblock %}
+  <div id="background"></div>
+  <div id="topbar">
+    <div id="logo">
+      Poolavan
+    </div>
+  
 
+
+  <div id="constant">
+    {% block content %} put your content here {% endblock %}
+  </div>
+
+  <!-- jQuery -->
+  <script src="/static/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/static/bootstrap.min.js"></script>
+
+  <!-- Scrolling Nav JavaScript -->
+  <script src="/static/jquery.easing.min.js"></script>
+  <script src="/static/scrolling-nav.js"></script>
 </body>
 </html>

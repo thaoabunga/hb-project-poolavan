@@ -85,8 +85,6 @@ def user_detail(user_id):
 
     user = User.query.get(user_id)
     usertrip = user.trips
-    #usertrip = User.trips
-    #return render_template("user.html", user=user)
     return render_template("user.html", user=user, usertrip=usertrip)
 
 @app.route("/mytrips") 
@@ -95,9 +93,6 @@ def mytrips_detail():
 
     user_id = session["user_id"]
     user = User.query.get(user_id)
-    
-    #usertrip = user.trips
-    # Convert this field to Enum on the model
     passenger_role = Role.query.filter_by(role='Passenger').first()
     driver_role = Role.query.filter_by(role='Driver').first()
 
@@ -113,7 +108,7 @@ def my_tripsdetail(trip_id):
     trip = Trip.query.get(trip_id)
     return render_template("mytripsdetail.html", trip=trip)
 
-@app.route("/trips") #add another activity search route, form submits to trip activity
+@app.route("/trips")
 def trip_list():
     """Show list of trips."""
 
@@ -158,20 +153,13 @@ def register_new_user():
     gender = request.form['gender']
     smoking_preference = request.form['smoking_preference']
 
-
     user_in_db = db.session.query(User).filter(User.username==username).all()
 
-
-    # if username (email) is in not in database, add them 
     if not user_in_db:
-        # add to db
-
         new_user = User(first_name=first_name, username=username, password=password, phone_number=phone_number, gender=gender, smoking_preference=smoking_preference)
         db.session.add(new_user)
         db.session.commit()
 
-
-    # redirect to homepage
     return redirect("/")
 
 
@@ -193,7 +181,7 @@ def user_login():
     # check login credentials against database, and route user accordingly
     if not current_user:
         # redirect to /register
-        flash("No record found. Please register!")
+        flash("No user found. Please register!")
         return redirect("/register")
 
     elif current_user and current_user.password == password:
@@ -246,8 +234,6 @@ def create_trip():
         car_capacity = request.form['car_capacity']
         activity_id = request.form['recreation_activity']
         role_id = request.form['role_id']
-
-        trip_dt= trip_departure_at.strptime("")
 
 
         new_trip = Trip(trip_name=trip_name, 

@@ -2,6 +2,7 @@
 {% block content %}
 
 <body>
+
 <script>
 
 function searchActivity(results) {
@@ -31,21 +32,18 @@ getMyTrips();
 function viewAllTrips(results)
 </script>
 
+<div id="homepage-block"></div>
 <!-- Check session for boolean 'logged_in' -->
 <!-- If not logged in, display login form -->
 {% if not session["logged_in"] %}
-    <div id="homepage-block">
-        <h1 id="homepage-title">Poolavan</h1>
-    </div>
-
-
-
-    <form action="/login" method="POST">
-        <p>Username (email)  <input type="text" name="username" placeholder="Username"></p>
-        <p>Password  <input type="password" name="password"  placeholder="Password"></p>
+<div id="login">
+<form action="/login" method="POST">
+    <p>Username (email)  <input type="text" name="username" placeholder="Username"></p>
+    <p>Password  <input type="password" name="password"  placeholder="Password"></p>
         <input type="submit" value="Log in">
         <input type="submit" value="Register">
-    </form>
+</form>
+</div>
 
 <!-- If user is logged in, display logout button -->
 {% else %}    
@@ -53,6 +51,7 @@ function viewAllTrips(results)
     <form action="/logout" method="POST">
         <input type="submit" value="Log out">
     </form>
-{% endif %}
 </body>
+{% endif %}
+
 {% endblock %}
