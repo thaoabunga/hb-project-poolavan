@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="" name="description">
-    <meta content="" name="author">
     <title>Poolavan</title>
 
 
@@ -24,9 +22,9 @@
 </head>
 
 {% with messages = get_flashed_messages() %}
-  {% for message in messages %}
-      <div class="alert alert-warning">{{ message }}</div>
-  {% endfor %}
+    {% for message in messages %}
+         <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
 {% endwith %}
 
 <body> 
@@ -36,8 +34,6 @@
       Poolavan
     </div>
   
-
-
   <div id="constant">
     {% block content %} put your content here {% endblock %}
   </div>

@@ -3,35 +3,6 @@
 
 <body>
 
-<script>
-
-function searchActivity(results) {
-    var activity = results;
-    $('#activity').html(activity);
-}
-
-function getActivity(){
-    $get.('/activity', searchActivity);
-}
-
-getActivity();
-
-function viewMyTrips(results) {
-    var mytrips = results;
-    $('#mytrips').html(results);
-}
-
-function getMyTrips(){
-    $get.('/mytrips', viewMyTrips);
-
-}
-
-getMyTrips();
-
-
-function viewAllTrips(results)
-</script>
-
 <div id="homepage-block"></div>
 <!-- Check session for boolean 'logged_in' -->
 <!-- If not logged in, display login form -->
@@ -44,6 +15,8 @@ function viewAllTrips(results)
         <input type="submit" value="Register">
 </form>
 </div>
+
+
 
 <!-- If user is logged in, display logout button -->
 {% else %}    

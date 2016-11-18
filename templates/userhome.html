@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class = "userhome"></div>
     <form id="logout" action="/logout" method="POST">
         <input type="submit" value="Log out">
     </form>
@@ -49,4 +50,6 @@
   <div id="weather"></div>
   <button class="js-geolocation" style="display: none;">Use Your Location</button>
 </div>
+
+
 {% endblock %}

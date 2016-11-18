@@ -9,37 +9,17 @@ from flask_debugtoolbar import DebugToolbarExtension
 from datetime import datetime
 from flask.ext.mail import Mail, Message
 
+import json
+
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
 
-# class Form(Form):
-#     dt = DateField('DatePicker', format = %m/%d/%y %H:%M)
 
-
-# administrator list
-# ADMINS = ['poolavannotifications@gmail.com']
-
-# mail = Mail(app)
-
-# # email server
-# app.config.update(
-#     MAIL_SERVER = 'smtp.gmail.com',
-#     MAIL_PORT = 587,
-#     MAIL_USE_SSL=False,
-#     MAIL_USE_TLS=True,
-#     MAIL_USERNAME = 'poolavannotifications@gmail.com',
-#     MAIL_PASSWORD = 'Athena12#'
-# )
 app.secret_key = "ABC"
 
 app.jinja_env.undefined = StrictUndefined
 
-# #def send_email(subject, sender, recipients, text_body, html_body):
-#     msg = Message(subject, sender=sender, recipients=recipients)
-#     msg.body = text_body
-#     msg.html = html_body
-#     mail.send(msg)
 
 @app.route('/')
 def hello_world():
@@ -69,7 +49,7 @@ def before_request():
 @app.route('/ridesharing')
 def interactive():
 
-        return render_template('ridesharing.html')
+    return render_template('ridesharing.html')
 
 
 @app.route("/users")
@@ -171,8 +151,7 @@ def user_login():
 
     username = request.form['username']
     password = request.form['password']
-
-
+    
     if "user_id" not in session:
         session["user_id"] = {}
 
