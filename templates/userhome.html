@@ -10,17 +10,16 @@
 
 <div id="content">
   <h3>Search for like-minded travelers by activity </h3>
-         <form action="/usertrip" method="GET">
-          <select name="activity_id">
+          <select name="activity_id" id="activity_id">
           {% for _ in activities %}
           <option value={{ _.activity_id }}>{{ _.recreation_type }}</option>
           {% endfor %}        
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="activitySubmit">
       
-       </select></form>
+       </select>
 
-    <div class="riders"></div> 
+    <div id="table"></div> 
 
 
       </p> <!-- need to link functionality -->
@@ -50,6 +49,33 @@
   <div id="weather"></div>
   <button class="js-geolocation" style="display: none;">Use Your Location</button>
 </div>
+
+
+<script>
+
+function showActivity(evt) {
+    evt.preventDefault();
+
+    var url = "/usertrip?activity_id=" + $('#activity_id').val();
+
+    $("#table").empty();
+    $.get(url, function(data) {
+       var tr;
+       users = data.users;
+      for (var i = 0; i < users.length; i++) {
+        
+        tr = $('<tr/>');
+        tr.append("<td>" + users[i].username + "</td>");
+        tr.append("<td>" + users[i].first_name + "</td>");
+        tr.append("<td>" + users[i].smoking_preference + "</td>");
+        $('#table').append(tr);
+    }
+    });
+}
+
+$("#activitySubmit").on('click', showActivity);
+
+</script>
 
 
 {% endblock %}

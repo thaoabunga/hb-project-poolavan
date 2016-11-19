@@ -151,10 +151,10 @@ def user_login():
     return render_template("userlogin.html")
 
 
-@app.route('/loginstatus.js', methods=['GET'])
+@app.route('/status.js', methods=['GET'])
 def user_status_login():
 
-    return render_template("loginstatus.js")
+    return render_template("status.js")
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -190,17 +190,25 @@ def login():
         return redirect("/")
 
 
-@app.route("/usertrip.json", methods=["GET"])
+
+
+@app.route("/usertrip", methods=["GET"])
 def activities_form():
     """Displays users' activities."""
 
 
-    users = User.query.all()
+    #users = User.query.all()
     activity_id = request.args.get('activity_id')
     activities = UserTrip.query.filter_by(activity_id=activity_id).all()
     rec_type = Activity.query.get(activity_id)
+ 
+    users = []
+    for activity in activities:
+        user = User.query.get(activity.user_id)
+        users.append(user)
+
     # return render_template('activity.html', users=users, activities=activities, activity_id=activity_id, rec_type=rec_type)
-    return jsonify(users=users, activities=activities, activity_id=activity_id, rec_type=rec_type)
+    return jsonify(users=[user.serialize() for user in users], rec_type=rec_type.serialize())
 
 
 

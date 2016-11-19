@@ -42,6 +42,17 @@ class User(db.Model):
                                             self.phone_number,
                                             self.gender,
                                             self.smoking_preference)
+
+    def serialize(self):
+        return {
+            'first_name': self.first_name,
+            'username': self.username,
+            'phone_number': self.phone_number,
+            'gender': self.gender,
+            'smoking_preference': self.smoking_preference
+        }
+
+
 class Trip(db.Model):
     """Initial trip details."""
 
@@ -117,6 +128,11 @@ class Activity(db.Model):
                           primary_key=True)
 
     recreation_type = db.Column(db.String(40), nullable=False)
+
+    def serialize(self):
+        return {
+            'rec_type': self.recreation_type
+        }
 
 # class RideRequest(db.Model):
 #     """User ride request."""
