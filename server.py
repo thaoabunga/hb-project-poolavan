@@ -2,7 +2,7 @@
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
-from flask_wtf import form
+# from flask_wtf import form
 from wtforms.fields.html5 import DateField
 from flask_debugtoolbar import DebugToolbarExtension
 #from hashlib import md5
@@ -26,6 +26,8 @@ def hello_world():
     """Homepage."""
 
     return render_template("homepage.html")
+
+
 
 @app.route('/userhome', methods=['GET', 'POST'])
 def userhome():
@@ -143,14 +145,23 @@ def register_new_user():
     return redirect("/")
 
 
+@app.route('/userlogin', methods=['GET'])
+def user_login():
 
+    return render_template("userlogin.html")
+
+
+@app.route('/loginstatus.js', methods=['GET'])
+def user_status_login():
+
+    return render_template("loginstatus.js")
 
 @app.route("/login", methods=['POST'])
-def user_login():
+def login():
     """User login"""
 
-    username = request.form['username']
-    password = request.form['password']
+    username = request.form.get('username')
+    password = request.form.get('password')
     
     if "user_id" not in session:
         session["user_id"] = {}
@@ -179,7 +190,7 @@ def user_login():
         return redirect("/")
 
 
-@app.route("/usertrip", methods=["GET"])
+@app.route("/usertrip.json", methods=["GET"])
 def activities_form():
     """Displays users' activities."""
 
@@ -187,7 +198,11 @@ def activities_form():
     users = User.query.all()
     activity_id = request.args.get('activity_id')
     activities = UserTrip.query.filter_by(activity_id=activity_id).all()
-    return render_template("activity.html", users=users, activities=activities, activity_id=activity_id)
+    rec_type = Activity.query.get(activity_id)
+    # return render_template('activity.html', users=users, activities=activities, activity_id=activity_id, rec_type=rec_type)
+    return jsonify(users=users, activities=activities, activity_id=activity_id, rec_type=rec_type)
+
+
 
 
 @app.route("/createtrip", methods=['GET', 'POST']) 

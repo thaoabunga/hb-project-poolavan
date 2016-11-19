@@ -26,42 +26,12 @@ input[type='submit'] {
 
 }
 
-
-
-#topbar {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  padding: 8px 0px;
-  box-sizing: border-box;
-}
-
-#logo {
-  font-family: 'Bungee Inline', cursive;
-  font-size: 32px;
-  float: left;
-  margin-left: 10;
-
-}
-
-#avatar {
-  width: 36px;
-  height: 36px;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/38/Ryan_Gosling_Cannes_2011.jpg');
-  border-radius: 100%;
-  float: right;
-  margin-right: 12px;
-}
-
 #content {
   padding: 50px 20px;
 }
 
 #greeting {
-  float: right;
+  float: left;
   margin-top: 10px;
   margin-right: 12px;
 }
@@ -71,11 +41,7 @@ input[type='submit'] {
   margin-top: 10px;
   margin-left: 20px;
 }
-#logout {
-  float: right;
-  margin-top: 2px;
-  margin-right: 10px;
-}
+
 
 
 

@@ -143,7 +143,7 @@ class Activity(db.Model):
 #     trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
 #     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
 #     trip_message = db.Column(db.String(140), nullable=False)
-#     message_tracking = db.Column(db.DateTime)
+#     message_tracking = db.Column(db.DateTim
 
 #####################################################################
 # Helper functions

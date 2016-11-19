@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1.0">
+        <title>Poolavan | Ridesharing for Adventurers. </title>
+        <meta name="description" content="poolavan is a ridesharing tool for those who are seeking to get out there.">
+        <!-- Google Recaptcha -->
+        <script type="text/javascript" async="" src="/static/ridesharing/"></script>
+        <script async="" src="/static/ridesharing/analytics.js"></script>
+        <script type="text/javascript" async="" src="/static/ridesharing/recaptcha__en.js">
+        </script><script src="/static/ridesharing/api.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    
+
+
+
+        <!-- Fonts -->
+        <link href="./ridesharing/css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="/static/ridesharing/fonts.css">
+        <!-- Styles -->
+        <link href="/static/ridesharing/style.css" rel="stylesheet">
+        <link href="./ridesharing_files/css(1)" rel="stylesheet" type="text/css">
+
+    </head>
+
+
+
+        <!-- Intro Header -->
+         <!-- TODO -->
+        <section class="purplebg text-center" style="padding:3em 0 1em;">
+            <div class="container">
+               
+{% block content %}
+
+
+
+<div id="homepage-block"></div>
+<!-- Check session for boolean 'logged_in' -->
+<!-- If not logged in, display login form -->
+{% if not session["logged_in"] %}
+<div id="login">
+<form action="/login" method="POST">
+    <p>Username (email)  <input type="text" name="username" placeholder="Username"></p>
+    <p>Password  <input type="password" name="password"  placeholder="Password"></p>
+        <input type="submit" value="Log in">
+        <input type="submit" value="Register">
+{% else %}    
+ <form action="/logout" method="POST">
+        <input type="submit" value="Log out">
+    </form>
+
+
+{% endif %}
+
+{% endblock %}
+
+
+            </div>
+        </section>
+       
+
+       
+        </footer>
+
+       
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+</script>
+
+

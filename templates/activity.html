@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Recommended Friends</h1>
+<h1>Recommended {{rec_type.recreation_type}} Friends</h1>
+
+
 
 {% for activity in activities %}
 <li>
     <a href="/users/{{ activity.user_id }}">
-    <h3>User: {{ activity.user_id }}</h3> 
+
+    <h3>User: {{ activity.user_id }} </h3> 
 </a></li>
 {% endfor %}
 
 {% endblock %}
 
+<!--  <a onclick="getTrips(this)" userid="{{activity.user_id}}" href="#">
+ -->
 

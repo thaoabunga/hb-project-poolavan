@@ -19,6 +19,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet"  type="text/css" href="/static/styles.css">
+    <script  src="loginstatus.js"></script>
 </head>
 
 {% with messages = get_flashed_messages() %}
@@ -26,26 +27,11 @@
          <div class="alert alert-warning">{{ message }}</div>
     {% endfor %}
 {% endwith %}
-
-<body> 
-  <div id="background"></div>
-  <div id="topbar">
-    <div id="logo">
-      Poolavan
-    </div>
   
   <div id="constant">
     {% block content %} put your content here {% endblock %}
   </div>
 
-  <!-- jQuery -->
-  <script src="/static/jquery.js"></script>
 
-  <!-- Bootstrap Core JavaScript -->
-  <script src="/static/bootstrap.min.js"></script>
-
-  <!-- Scrolling Nav JavaScript -->
-  <script src="/static/jquery.easing.min.js"></script>
-  <script src="/static/scrolling-nav.js"></script>
 </body>
 </html>
