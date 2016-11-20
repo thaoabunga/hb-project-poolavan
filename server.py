@@ -200,12 +200,15 @@ def activities_form():
     #users = User.query.all()
     activity_id = request.args.get('activity_id')
     activities = UserTrip.query.filter_by(activity_id=activity_id).all()
+    #trip = 
     rec_type = Activity.query.get(activity_id)
- 
+
     users = []
     for activity in activities:
         user = User.query.get(activity.user_id)
         users.append(user)
+        #trip = UserTrip.query.get()
+
 
     # return render_template('activity.html', users=users, activities=activities, activity_id=activity_id, rec_type=rec_type)
     return jsonify(users=[user.serialize() for user in users], rec_type=rec_type.serialize())

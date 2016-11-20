@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-git.js"></script>
+<script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+
 {% extends 'base.html' %}
 {% block content %}
 
@@ -9,7 +18,12 @@
     <p>Origin <input type="text" name="departure_address"></p>
     <p>Arrival <input type="text" name="arrival_address"></p>
 
-    <p>Departure at <input type="text" name="trip_departure_at"></p>
+
+    <p>Departure at <input type="text" name="trip_departure_at" id="datepicker" ></p>
+    <script>
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker( "option", "autoSize", true );</script>
+ 
 
     <p>Arrival at <input type="text" class='date' id="arrival" name="trip_arrival_at"></p>
     <p>Car Capacity <input type="integer" name="car_capacity"></p>
@@ -32,4 +46,8 @@
     <p><input type="submit" value="Ahoy!"></p>
 </form>
 
-{% endblock %}  
+{% endblock %}
+
+</html>
+</head>
+ 
