@@ -1,39 +1,18 @@
 
 from jinja2 import StrictUndefined
-
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
-# from flask_wtf import form
-from wtforms.fields.html5 import DateField
 from flask_debugtoolbar import DebugToolbarExtension
-#from hashlib import md5
 from datetime import datetime
-# from flask_mail import Mail, Message
-
 import json
-
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
-# mail = Mail(app)
-
 
 app.secret_key = "ABC"
 
 app.jinja_env.undefined = StrictUndefined
 
-# app.config['MAIL_SERVER']='smtp.gmail.com'
-# app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USERNAME'] = 'poolavannotifications@gmail.com'
-# app.config['MAIL_PASSWORD'] = 'Athena12#'
-# app.config['MAIL_USE_TLS'] = False
-# app.config['MAIL_USE_SSL'] = True
-
-# @app.route("/")
-# def index():
-#    msg = Message('Hello', sender = 'yourId@gmail.com', recipients = ['id1@gmail.com'])
-#    msg.body = "This is the email body"
-#    mail.send(msg)
-#    return "Sent"
+################## Render Templates
 
 @app.route('/')
 def hello_world():
@@ -49,25 +28,6 @@ def userhome():
     activities = Activity.query.all()
     return render_template("userhome.html", activities=activities)
 
-
-@app.before_request
-def before_request():
-    """ Default session["logged_in"] to false if next endpoint is not /login"""
-
-    if "logged_in" not in session and request.endpoint != 'login':
-        session["logged_in"] = False
-
-
-
-
-################## Render Templates
-
-@app.route('/ridesharing')
-def interactive():
-
-    return render_template('ridesharing.html')
-
-
 @app.route("/users")
 def user_list():
     """Show list of users."""
@@ -75,6 +35,7 @@ def user_list():
     users = User.query.all()
     return render_template("user_list.html", 
                             users=users)
+
 @app.route("/users/<int:user_id>", methods=["GET"])
 def user_detail(user_id):
     """Show info about user."""

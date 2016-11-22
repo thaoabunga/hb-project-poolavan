@@ -25,7 +25,11 @@
     $( "#datepicker" ).datepicker( "option", "autoSize", true );</script>
  
 
-    <p>Arrival at <input type="text" class='date' id="arrival" name="trip_arrival_at"></p>
+    <p>Arrival at <input type="date" id="datepicker" name="trip_arrival_at"></p>
+     <script>
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker( "option", "autoSize", true );</script>
+    
     <p>Car Capacity <input type="integer" name="car_capacity"></p>
     </p>
     <p>Role: 
