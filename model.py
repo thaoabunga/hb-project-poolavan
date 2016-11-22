@@ -134,19 +134,27 @@ class Activity(db.Model):
             'rec_type': self.recreation_type
         }
 
-# class RideRequest(db.Model):
-#     """User ride request."""
+class RideRequest(db.Model):
+    """RideRequest determines the passenger ride requests"""
 
-#     __tablename__ = "riderequests"
+    __tablename__ = "riderequests"
 
-#     ride_request_id = db.Column(db.Integer,
-#                           autoincrement=True,
-#                           primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
-#     active = db.Column(db.Boolean, nullable =False) #check to see if user is active, needs a ride
-#     trip_departure_at = db.Column(db.DateTime, nullable=False)
-#     trip_arrival_at = db.Column(db.DateTime, nullable=False)
-#     activity = db.Column(db.String(60), nullable=False)
+    OPTIONS = Choices(
+        (1, "PENDING", _("Pending")),
+        (2, "REJECTED", _("Rejected")),
+        (3, "ACCEPTED", _("Accepted")),
+    )
+
+    # ride_request_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    # ride = db.Column(db.String(50),db.ForeignKey("UserTrip", related_name="request")
+    # passenger = db.Column(db.String(50), db.ForeignKey("Role", )
+    # status = db.Column.PositiveSmallIntegerField(_("Status"), choices=OPTIONS, default=OPTIONS.PENDING)
+
+
+    def __unicode__(self):
+        """string representation"""
+        return "By %s for ride #%d - %s" % (self.passenger.username, self.ride.id, self.status)
+
 
 # class TripMessage(db.Model): #second sprint TBD
 #     """Trip messages between users in a carpool."""

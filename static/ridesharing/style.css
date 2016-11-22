@@ -10542,7 +10542,6 @@ body {
     margin-right: 0.5em;
 }
 .navbar-custom.thedesktopnav .thelogin ul.theloginbuttonwrapper ul.dropdown-menu {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
     margin-top: 1em;
     background: #fff;
     justify-content: left;
@@ -10574,7 +10573,6 @@ body {
     list-style: none;
     text-align: center;
     padding-left: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
     margin-top: 1em;
     background: #fff;
 }

@@ -22,6 +22,10 @@
     <script  src="status.js"></script>
 </head>
 
+       <form action="/userhome" method="POST">
+          <input type="submit" value="Home">
+    </form>
+
 {% with messages = get_flashed_messages() %}
     {% for message in messages %}
          <div class="alert alert-warning">{{ message }}</div>

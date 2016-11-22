@@ -15,6 +15,9 @@
             <p>Departure Time: {{ trip.trip_departure_at }}</p>
             <p>Arrival Time: {{ trip.trip_arrival_at }}</p>
             <p>Car Capacity: {{ trip.car_capacity }}</p>
+            {% for rider in trip.users %}
+            <a href="/user/rider.user_id"></a>
+            {% endfor %}
             <input type="hidden" name="trip_id" value={{ trip.trip_id }} />
             <input type="submit" value="Join Trip "/>
         </form>

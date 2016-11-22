@@ -7,19 +7,33 @@ from wtforms.fields.html5 import DateField
 from flask_debugtoolbar import DebugToolbarExtension
 #from hashlib import md5
 from datetime import datetime
-from flask.ext.mail import Mail, Message
+# from flask_mail import Mail, Message
 
 import json
 
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
 app = Flask(__name__)
+# mail = Mail(app)
 
 
 app.secret_key = "ABC"
 
 app.jinja_env.undefined = StrictUndefined
 
+# app.config['MAIL_SERVER']='smtp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = 'poolavannotifications@gmail.com'
+# app.config['MAIL_PASSWORD'] = 'Athena12#'
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
+
+# @app.route("/")
+# def index():
+#    msg = Message('Hello', sender = 'yourId@gmail.com', recipients = ['id1@gmail.com'])
+#    msg.body = "This is the email body"
+#    mail.send(msg)
+#    return "Sent"
 
 @app.route('/')
 def hello_world():
@@ -79,6 +93,7 @@ def mytrips_detail():
     driver_role = Role.query.filter_by(role='Driver').first()
 
     user_trips = UserTrip.query.filter_by(user_id=user.user_id, role_id=driver_role.role_id).all()
+
     user_rides = UserTrip.query.filter_by(user_id=user.user_id, role_id=passenger_role.role_id).all()
     
     return render_template("mytrips.html", user=user, user_trips=user_trips, user_rides=user_rides)
@@ -88,6 +103,7 @@ def my_tripsdetail(trip_id):
     """Show trip details for user."""
 
     trip = Trip.query.get(trip_id)
+    print trip.users
     return render_template("mytripsdetail.html", trip=trip)
 
 @app.route("/trips")

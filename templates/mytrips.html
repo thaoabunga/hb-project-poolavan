@@ -9,7 +9,7 @@
         <p><h2>My Trips:</h2></p>   
         {% for user_trip in user_trips %}
         <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
-        {{ user_trip.trip.trip_name }} | Trip Id: ({{ user_trip.trip.trip_id }})
+        {{ user_trip.trip.trip_name }} | Trip Id: {{ user_trip.trip.trip_id }}
         </li></a>
         {% endfor %}
 
@@ -18,7 +18,7 @@
 
         {% for user_trip in user_rides %}
         <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
-            {{ user_trip.trip.trip_name }} | Trip Id: ({{ user_trip.trip.trip_id }})
+            {{ user_trip.trip.trip_name }} | Trip Id: {{ user_trip.trip.trip_id }}
         </li></a>
         {% endfor %}
 
