@@ -91,12 +91,29 @@ def mytrips_detail():
     user = User.query.get(user_id)
     passenger_role = Role.query.filter_by(role='Passenger').first()
     driver_role = Role.query.filter_by(role='Driver').first()
+    # find all trips by current user
+    # find all usertrips with request='pending' and trip_id=^^
 
-    user_trips = UserTrip.query.filter_by(user_id=user.user_id, role_id=driver_role.role_id).all()
+    my_user_trips = UserTrip.query.filter_by(user_id=user.user_id, role_id=driver_role.role_id)
+    my_trip_ids = [user_trip.trip.trip_id for user_trip in my_user_trips.all()]
+    user_trip_requests = UserTrip.query.filter(UserTrip.trip_id.in_(my_trip_ids), UserTrip.role_id==passenger_role.role_id)
+
+    #
+   
+    active_trips = my_user_trips.filter_by(request='active').all()
+    pending_trips = user_trip_requests.filter_by(request='pending').all()
+    rejected_trips = user_trip_requests.filter_by(request='rejected').all()
 
     user_rides = UserTrip.query.filter_by(user_id=user.user_id, role_id=passenger_role.role_id).all()
     
-    return render_template("mytrips.html", user=user, user_trips=user_trips, user_rides=user_rides)
+    return render_template(
+        "mytrips.html",
+        user=user,
+        active_trips=active_trips,
+        pending_trips=pending_trips,
+        rejected_trips=rejected_trips,
+        user_rides=user_rides
+    )
 
 @app.route("/mytrips/<int:trip_id>",methods=['GET'])
 def my_tripsdetail(trip_id):
@@ -105,6 +122,23 @@ def my_tripsdetail(trip_id):
     trip = Trip.query.get(trip_id)
     print trip.users
     return render_template("mytripsdetail.html", trip=trip)
+
+
+@app.route("/update_status/<int:trip_id>", methods=['POST'])
+def update_status(trip_id):
+    """Accept/Reject a user trip."""
+
+    user_trip = UserTrip.query.get(trip_id)
+    action = request.json['action']
+
+    if (action == 'accept'):
+        user_trip.request = 'active'
+    elif (action == 'reject'):
+        user_trip.request = 'rejected'
+
+    db.session.add(user_trip)
+    db.session.commit()
+    return jsonify({ 'status': 'success' })
 
 @app.route("/trips")
 def trip_list():
@@ -304,7 +338,7 @@ def join_trip():
         trip_id=trip.trip_id,
         role_id=passenger_role.role_id, 
         activity_id=user_trip.activity_id,
-        request='active'
+        request='pending'
     )
 
     db.session.add_all([new_user_trip, current_user])

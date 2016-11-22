@@ -608,15 +608,15 @@ pre code {
 }
 @media (min-width: 768px) {
     .container {
-    width: 750px;
+    width: 100%;
 }
 }@media (min-width: 992px) {
     .container {
-    width: 970px;
+    width: 100%;
 }
 }@media (min-width: 1200px) {
     .container {
-    width: 1170px;
+    width: 100%;
 }
 }.container-fluid {
     margin-right: auto;
@@ -9191,7 +9191,7 @@ a:hover, a:focus {
     outline: none;
 }
 .navbar-custom .navbar-brand .navbar-toggle {
-    padding: 4px 6px;
+    padding: 2px 4px;
     font-size: 16px;
     color: #2196F3;
 }
@@ -9216,7 +9216,7 @@ a:hover, a:focus {
 }
 @media (min-width: 767px) {
     .navbar {
-    padding: 20px 0;
+    padding: 0px 0;
     border-bottom: none;
     letter-spacing: 1px;
     background: transparent;
@@ -9287,7 +9287,6 @@ a:hover, a:focus {
 .life-section {
     width: 100%;
     color: #ECECEC;
-    background: #000 url(https://d24csy0j78lrn6.cloudfront.net/frontpage/life-bg-optimized.jpg) no-repeat scroll center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -10573,19 +10572,18 @@ body {
     list-style: none;
     text-align: center;
     padding-left: 0;
-    margin-top: 1em;
     background: #fff;
 }
 .navbar-custom.thedesktopnav ul.thelinks li {
-    padding: 1em;
     display: inline-block;
     font-size: 25px;
     font-family: 'Gotham Condensed',  "Gotham Cond SSm A",  "Gotham Cond SSm B",  'Roboto Condensed',  "Gotham SSm A",  "Gotham SSm B",  'Gotham',  "Helvetica Neue",  Helvetica,  Arial,  sans-serif;
+    margin-right: 35px;
 }
 @media screen and (max-width: 1150px) {
     .navbar-custom.thedesktopnav ul.thelinks li {
     font-size: 18px;
-    padding: 1em 0.5em;
+
 }
 }.navbar-custom.thedesktopnav ul.thelinks li.thelogo {
     width: 172px;
@@ -10662,7 +10660,7 @@ body {
     float: left;
     width: 80%}
 .intro-body {
-    text-shadow: 0px 0px 31.15px rgba(0, 0, 0, 0.43);
+    text-shadow: rgba(0, 0, 0, 0.43);
     color: #fff;
     display: -webkit-flex;
     display: flex;
@@ -10843,21 +10841,12 @@ body {
     position: relative;
     display: table;
 }
-#features.life-section {
-    background: url(/frontpage/public/img/corp-optimized.jpg) no-repeat scroll bottom center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-}
+
 @media screen and (min-width: 767px) {
     #features.life-section {
     background-attachment: fixed;
 }
-}#features.life-section.uni {
-    background: url(/frontpage/public/img/uni-optimized.jpg) no-repeat scroll bottom center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
+ background-size: cover;
 }
 @media screen and (min-width: 767px) {
     #features.life-section.uni {
@@ -11029,9 +11018,7 @@ body {
     .intro-body {
     padding-top: 120px;
 }
-#features {
-    min-height: 500px;
-}
+
 }@media (max-width: 767px) {
     section {
     padding-top: 50px !important;
@@ -11447,7 +11434,7 @@ footer a i.circle {
 
 #about.container.content-section{
     background: url('../Happies_Sads.jpg');
-    background-size: 100%;
+    background-size: cover;
 
 }
 

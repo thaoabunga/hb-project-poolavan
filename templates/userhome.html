@@ -65,8 +65,8 @@ function showActivity(evt) {
       for (var i = 0; i < users.length; i++) {
         
         tr = $('<tr/>');
-        tr.append("<td>" + users[i].username + "</td>");
-        tr.append("<td>" + users[i].first_name + "</td>");
+        tr.append("<td><a href=\"/users/" + users[i].user_id + "\">" + users[i].username + "</a></td>");
+        tr.append("<td><a href=\"/users/" + users[i].first_name + "</a></td>");
         tr.append("<td>" + users[i].smoking_preference + "</td>");
         $('#table').append(tr);
     }

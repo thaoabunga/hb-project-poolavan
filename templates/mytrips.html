@@ -6,15 +6,15 @@
 
         <center><h2>My Profile</h2></center>
 
-        <p><h2>My Trips:</h2></p>   
-        {% for user_trip in user_trips %}
+        <h2>My Trips:</h2>
+        {% for user_trip in active_trips %}
         <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
         {{ user_trip.trip.trip_name }} | Trip Id: {{ user_trip.trip.trip_id }}
         </li></a>
         {% endfor %}
 
 
-         <p><h2>My Rides:</h2></p>  
+        <h2>My Rides:</h2>
 
         {% for user_trip in user_rides %}
         <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
@@ -22,6 +22,21 @@
         </li></a>
         {% endfor %}
 
+        <h2>Pending requests:</h2>
+
+        {% for user_trip in pending_trips %}
+        <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
+            {{ user_trip.trip.trip_name }} | <button class="statusBtn" data-action="accept" data-trip={{ user_trip.user_trip_id }}>Accept</button> | <button data-action="reject" data-trip={{ user_trip.user_trip_id }} class="statusBtn">Reject</button>
+        </li></a>
+        {% endfor %}
+
+        <h2>Rejected requests:</h2>
+
+        {% for user_trip in rejected_trips %}
+        <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
+            {{ user_trip.trip.trip_name }} | Trip Id: {{ user_trip.trip.trip_id }}
+        </li></a>
+        {% endfor %}
 </div>
 
         <div id="directionsService"></div>
@@ -35,6 +50,7 @@
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
+
     function calculateRoute(from, to) {
         // Center initialized to San Francisco, CA
         var myOptions = {
@@ -71,6 +87,23 @@
       }
 
       $(document).ready(function() {
+        $('button.statusBtn').bind('click',  function(e) {
+          e.preventDefault();
+          var tripId = $(this).data('trip');
+          var action = $(this).data('action');
+
+          $.ajax({
+            type: "POST",
+            url: '/update_status/'+tripId,
+            data: JSON.stringify({ action: action }),
+            success: function(response) { console.log('Posted to the server'); },
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+          });
+
+            
+        });
+           
         // If the browser supports the Geolocation API
         if (typeof navigator.geolocation == "undefined") {
           $("#error").text("Your browser doesn't support the Geolocation API");
