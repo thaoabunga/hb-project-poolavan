@@ -64,6 +64,8 @@ def mytrips_detail():
     active_trips = my_user_trips.filter_by(request='active').all()
     pending_trips = user_trip_requests.filter_by(request='pending').all()
     rejected_trips = user_trip_requests.filter_by(request='rejected').all()
+    cancelled_trips = user_trip_requests.filter_by(request='cancelled').all()
+    completed_trips = user_trip_requests.filter_by(request='completed').all()
 
     user_rides = UserTrip.query.filter_by(user_id=user.user_id, role_id=passenger_role.role_id).all()
     
@@ -73,7 +75,9 @@ def mytrips_detail():
         active_trips=active_trips,
         pending_trips=pending_trips,
         rejected_trips=rejected_trips,
-        user_rides=user_rides
+        user_rides=user_rides,
+        cancelled_trips=cancelled_trips,
+        completed_trips=completed_trips,
     )
 
 @app.route("/mytrips/<int:trip_id>",methods=['GET'])
@@ -91,6 +95,7 @@ def update_status(trip_id):
 
     user_trip = UserTrip.query.get(trip_id)
     action = request.json['action']
+    print action
 
     if (action == 'accept'):
         user_trip.request = 'active'
@@ -98,6 +103,22 @@ def update_status(trip_id):
         user_trip.request = 'rejected'
 
     db.session.add(user_trip)
+    db.session.commit()
+    return jsonify({ 'status': 'success' })
+
+@app.route("/remove_status/<int:trip_id>", methods=['POST'])
+def remove_status(trip_id):
+    """Remove a usertrip"""
+
+    user_trip = UserTrip.query.get(trip_id)
+    action = request.json['action']
+
+    if (action == 'remove'):
+        user_trip.request = 'remove'
+    elif (action == 'complete'):
+        user_trip.request = 'completed'
+
+    db.session.delete(user_trip)
     db.session.commit()
     return jsonify({ 'status': 'success' })
 
@@ -210,14 +231,14 @@ def activities_form():
 
     #users = User.query.all()
     activity_id = request.args.get('activity_id')
-    activities = UserTrip.query.filter_by(activity_id=activity_id).all()
+    activities = UserTrip.query.filter_by(activity_id=activity_id).all() #tried .distinct, .all, .one
     #trip = 
     rec_type = Activity.query.get(activity_id)
 
-    users = []
+    users = set()
     for activity in activities:
         user = User.query.get(activity.user_id)
-        users.append(user)
+        users.add(user)
         #trip = UserTrip.query.get()
 
 

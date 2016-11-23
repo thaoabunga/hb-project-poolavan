@@ -2,10 +2,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<script>
+function validateForm()
+{
+  var fields = ["first_name", "username", "phone_number", "password", "gender", "activity", "smoking_preference"]
+
+  var i, l = fields.length;
+  var fieldname;
+  for (i = 0; i < l; i++) {
+    fieldname = fields[i];
+    if (document.forms["myForm"][fieldname].value === "") {
+      alert(fieldname + " can not be empty");
+      return false;
+    }
+  }
+  return true;
+}
+</script>
+
 <h1>Register</h1>
 
 <h3>Please use your email address as your username.</h3>
-<form action="register" method="POST">
+<form name="myForm" action="register" method="POST"onsubmit="return validateForm()">
     <p>Name (first) <input type="text" name="first_name"></p>
     <p>Username (email)  <input type="text" name="username"></p>
     <p>Phone number <input type="text" name="phone_number"></p>

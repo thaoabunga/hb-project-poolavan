@@ -6,6 +6,23 @@
 <script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+<script>
+function validateForm()
+{
+  var fields = ["trip_name", "departure_address", "arrival_address", "trip_departure_at", "trip_arrival_at", "car_capacity", "role", "activity"]
+
+  var i, l = fields.length;
+  var fieldname;
+  for (i = 0; i < l; i++) {
+    fieldname = fields[i];
+    if (document.forms["myForm"][fieldname].value === "") {
+      alert(fieldname + " can not be empty");
+      return false;
+    }
+  }
+  return true;
+}
+</script>
 
 {% extends 'base.html' %}
 {% block content %}
@@ -13,13 +30,13 @@
 <h1>Create a trip!</h1>
 
 <h3>Let's get outside, together!</h3>
-<form action="/createtrip" method= "POST">
+<form name="myForm" action="/createtrip" onsubmit="return validateForm()" method="post">
     <p>Trip Name <input type="text" name="trip_name"></p>
     <p>Origin <input type="text" name="departure_address"></p>
     <p>Arrival <input type="text" name="arrival_address"></p>
 
 
-    <p>Departure at <input type="date" name="trip_departure_at" id="datepicker" ></p>
+    <p>Departure at <input type ="date" name="trip_departure_at" id="datepicker" ></p>
     <script>
     $( "#datepicker" ).datepicker();
     $( "#datepicker" ).datepicker( "option", "autoSize", true );</script>
@@ -29,7 +46,7 @@
      <script>
     $( "#datepicker" ).datepicker();
     $( "#datepicker" ).datepicker( "option", "autoSize", true );</script>
-    
+
     <p>Car Capacity <input type="integer" name="car_capacity"></p>
     </p>
     <p>Role: 
