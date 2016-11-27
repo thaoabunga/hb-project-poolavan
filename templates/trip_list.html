@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="col-xs-12 col-lg-6">
+  <div id="triplist">
+
                   <h2>Trips</h2>
                   <h4>Select a trip to join a trip!</h4>
                   <ul>
@@ -12,10 +15,5 @@
                   </li>
               {% endfor %}
             </ul>
-
-<h2>Bay Area Trip Suggestions </h2>
-<!-- BEGIN Hiking Project Area Report -->
-<iframe style="width:100%; max-width:1200px; height:500px;" frameborder="0" scrolling="no" src="https://www.hikingproject.com/widget/map?favs=1&location=ip&x=-13626747&y=4549663&z=7&h=500"></iframe>
-<!-- END Hiking Project -->
 
 {% endblock %}

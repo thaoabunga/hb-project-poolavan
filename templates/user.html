@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="col-xs-12 col-lg-6">
+    <div id="userlist">
 
-<h1>User {{ user.user_id }}</h1>
-
-
-        <p>Name: {{ user.first_name }}</p>
-        <p>Phone Number: {{ user.phone_number }}</p>
-        <p><a href= "mailto:{{ user.username }}">Send Email</a></p>
-        <p>Gender: {{ user.gender }}</p>
-        <p>Smoking Preference: {{ user.smoking_preference }}</p>
-        <p>Current User Trips:
-        {% for trip in usertrip %}</p>
+        Name: {{ user.first_name }}</br>
+        Phone Number: {{ user.phone_number }}</br>
+        <a href= "mailto:{{ user.username }}">Send Email</a></br>
+        Gender: {{ user.gender }}</br>
+        Smoking Preference: {{ user.smoking_preference }}</br>
+        Current User Trips:
+        {% for trip in usertrip %}</br>
         <a href="/trips/{{ trip.trip_id }}">  
-        <p>{{ trip.trip_name }} ({{ trip.trip_id }})</p>
+        {{ trip.trip_name }} ({{ trip.trip_id }})
 
     {% endfor %}
   {% endblock %}

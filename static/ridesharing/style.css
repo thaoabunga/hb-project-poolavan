@@ -10675,7 +10675,7 @@ body {
 }
 .intro-body .intro-text {
     font-size: 25px;
-    margin-bottom: 0.5em;
+    margin-bottom: 12.5em;
 }
 @media screen and (max-width: 768px) {
     .intro-body .intro-text {
@@ -11014,7 +11014,7 @@ body {
 }
 @media (min-width: 768px) {
     .intro-body {
-    padding-top: 120px;
+    padding-top: 12px;
 }
 
 }@media (max-width: 767px) {
@@ -11425,7 +11425,7 @@ footer a i.circle {
     background-size: */
 
 .intro-body{
-    background: url('../night.jpg');
+    background: url('../tent.jpg');
     background-size: 100%;
 
 }
@@ -11461,7 +11461,7 @@ footer a i.circle {
 #cleartrip{
     position: absolute;
     left:30%;
-    top: 40%;
+    top: 23%;
     width: 450px;
 
 }
@@ -11474,4 +11474,26 @@ float :right;
 
 #cleartrip select {
     float:right;
+}
+
+#triplist {
+    position: absolute;
+    left: 58%;
+    top: 40%;
+    width: 450px;
+}
+
+#userlist {
+    position: absolute;
+    left: 58%;
+    top: 40%;
+    width: 450px;
+}
+
+#registrationform{
+    position: absolute;
+    left: 33%;
+
+
+
 }

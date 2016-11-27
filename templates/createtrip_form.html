@@ -20,10 +20,7 @@ function validateForm()
 </script>
 
 
-
-<h1>Create a trip!</h1>
-
-<h2>Let's get outside, together!</h2>
+<h3>Let's get outside, together!</h3>
 <form name="myForm" action="/createtrip" onsubmit="return validateForm()" method="post">
   <div id="cleartrip">
     <p>Trip Name <input type="text" name="trip_name"></p>
@@ -43,7 +40,7 @@ function validateForm()
     $( "#datepicker" ).datepicker( "option", "autoSize", true );</script>
 
     <p>Car Capacity <input type="integer" name="car_capacity"></p>
-    </p>
+
     <p>Role: 
     <select name="role_id">
       {% for role in roles %}
