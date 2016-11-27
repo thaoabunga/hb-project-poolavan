@@ -7,7 +7,6 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
-# dtDate = datetime.datetime.strptime(sDate, "%A, %d. %B %Y %I:%M%p")
 
 #####################################################################
 # Model definitions
@@ -68,9 +67,7 @@ class Trip(db.Model):
     trip_departure_at = db.Column(db.DateTime, nullable=False)
     trip_arrival_at = db.Column(db.DateTime, nullable=False)
     car_capacity = db.Column(db.Integer, nullable=False)
-    # dtdeparture_at = datetime.datetime.strptime(sDate, "%A, %d. %B %Y %I:%M%p")
-    # dtarrival_at = datetime.datetime.strptime(sDate, "%A, %d. %B %Y %I:%M%p")
-
+    
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -96,9 +93,9 @@ class UserTrip(db.Model):
     request = db.Column(db.String(50), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey("activities.activity_id"), nullable=False)
-    trip = db.relationship('Trip', uselist=False) #uselist this relationship is 1:1, single obj 
+    trip = db.relationship('Trip', uselist=False) 
     usertrips_ = db.relationship('Activity', backref='usertrips')
-    # write method on how to access user's role and 
+
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -135,40 +132,7 @@ class Activity(db.Model):
             'rec_type': self.recreation_type
         }
 
-# class RideRequest(db.Model):
-#     """RideRequest determines the passenger ride requests"""
 
-#     __tablename__ = "riderequests"
-
-#     OPTIONS = Choices(
-#         (1, "PENDING", _("Pending")),
-#         (2, "REJECTED", _("Rejected")),
-#         (3, "ACCEPTED", _("Accepted")),
-#     )
-
-#     ride_request_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     ride = db.Column(db.String(50),db.ForeignKey("UserTrip", related_name="request")
-#     passenger = db.Column(db.String(50), db.ForeignKey("Role", )
-#     carpool_status = db.Column.PositiveSmallIntegerField(_("Status", choices=OPTIONS, default=OPTIONS.PENDING)
-
-
-#     def __unicode__(self):
-#         """string representation"""
-#         return "By %s for ride #%d - %s" % (self.passenger.username, self.ride.id, self.status)
-
-
-# class TripMessage(db.Model): #second sprint TBD
-#     """Trip messages between users in a carpool."""
-
-#     __tablename__= "tripmessages"
-
-#     trip_message_id = db.Column(db.Integer,
-#                           autoincrement=True,
-#                           primary_key=True)
-#     trip_id = db.Column(db.Integer, db.ForeignKey("trips.trip_id"), nullable=False)
-#     role_id = db.Column(db.Integer, db.ForeignKey("roles.role_id"), nullable=False)
-#     trip_message = db.Column(db.String(140), nullable=False)
-#     message_tracking = db.Column(db.DateTim
 
 #####################################################################
 # Helper functions
@@ -183,9 +147,6 @@ def connect_to_db(app):
 
 
 if __name__ == "__main__":
-    # As a convenience, if we run this module interactively, it will
-    # leave you in a state of being able to work with the database
-    # directly.
 
     from server import app
 

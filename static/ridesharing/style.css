@@ -81,9 +81,9 @@ code, kbd, pre, samp {
     font-size: 1em;
 }
 button, input, optgroup, select, textarea {
-    color: inherit;
+    color: black;
     font: inherit;
-    margin: 0;
+    margin: 2px;
 }
 button {
     overflow: visible;
@@ -9148,7 +9148,6 @@ html {
     height: 100%}
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 35px;
-    text-transform: uppercase;
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
@@ -10466,7 +10465,7 @@ body {
 body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: auto;
-    background: #fff;
+    background: #000;
     color: #fff;
     font-family: "Gotham",  "GothamSSm 4r",  "Gotham SSm A",  "Gotham SSm B",  "Helvetica Neue",  Helvetica,  Arial,  sans-serif !important;
     font-weight: 400;
@@ -10483,6 +10482,7 @@ body {
 }h1, h2, h3, h4, h5 {
     font-family: "Gotham",  "GothamSSm 7r",  "Gotham SSm A",  "Gotham SSm B",  "Helvetica Neue",  Helvetica,  Arial,  sans-serif !important;
     font-weight: 700;
+    text-align: center;
 }
 .btn-primary {
     background-color: #2196F3;
@@ -10572,7 +10572,7 @@ body {
     list-style: none;
     text-align: center;
     padding-left: 0;
-    background: #fff;
+
 }
 .navbar-custom.thedesktopnav ul.thelinks li {
     display: inline-block;
@@ -10717,7 +10717,6 @@ body {
 }
 #about h2 {
     color: #00000;
-    font-size: 2em;
     text-transform: none;
     text-align: center;
 }
@@ -11427,7 +11426,7 @@ footer a i.circle {
     background-size: */
 
 .intro-body{
-    background: url('../waterfall-802126_1920.jpg');
+    background: url('../night.jpg');
     background-size: 100%;
 
 }
@@ -11446,4 +11445,8 @@ footer a i.circle {
 #features.content-section.text-center.life-section{
     background: url('../star-1633185_1280.jpg');
     background-size: 100%;
+}
+
+#greeting{
+    font-size: 20;
 }
