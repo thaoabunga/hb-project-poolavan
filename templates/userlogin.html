@@ -38,17 +38,20 @@
 <div id="homepage-block"></div>
 <!-- Check session for boolean 'logged_in' -->
 <!-- If not logged in, display login form -->
-{% if not session["logged_in"] %}
+{% if not session or not session["logged_in"] %}
 <div id="login">
 <form action="/login" method="POST">
-    <p>Username (email)  <input type="text" name="username" placeholder="Username"></p>
-    <p>Password  <input type="password" name="password"  placeholder="Password"></p>
-        <input type="submit" value="Log in">
-        <input type="submit" value="Register">
+    <table class="logintable">
+      <tr><td>Username (email)</td><td>  <input type="text" name="username" placeholder="Username"></td></tr>
+      <tr><td>Password</td><td> <input type="password" name="password"  placeholder="Password"></td></tr>
+      <tr><td></td>
+       <td> <input type="submit" value="Log in"> <input type="submit" value="Register"></td></tr>
+    
+    </table>
+   
+       
 {% else %}    
- <form action="/logout" method="POST">
-        <input type="submit" value="Log out">
-    </form>
+
 
 
 {% endif %}
@@ -71,5 +74,4 @@
 
        
 </script>
-
 

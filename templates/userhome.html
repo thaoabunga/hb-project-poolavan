@@ -1,61 +1,11 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1.0">
-        <title>Poolavan | Ridesharing for Adventurers. </title>
-        <meta name="description" content="poolavan is a ridesharing tool for those who are seeking to get out there.">
-
-
-        <!-- Fonts -->
-        <link href="./ridesharing/css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="/static/ridesharing/fonts.css">
-        <!-- Styles -->
-        <link href="/static/ridesharing/style.css" rel="stylesheet">
-        <link href="./ridesharing_files/css(1)" rel="stylesheet" type="text/css">
-
-    </head>
-
-
-
-
-        <!-- Navigation -->
-       
-        <nav class="navbar navbar-custom navbar-static-top thedesktopnav" role="navigation">
-            
-            <ul class="thelinks">
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/mytrips" rollapp-href="http://localhost:5000/mytrips">My Trips</a>
-                </li>                
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/createtrip" rollapp-href="http://localhost:5000/createtrip">Create Trip</a>
-                </li>
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/trips" rollapp-href="http://localhost:5000/trips">View Trips</a>
-                </li>
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/users" rollapp-href="http://localhost:5000/users">View Users</a>
-                </li>
-
-            </ul>
-        </nav>
-
-
-
-
-
 {% extends 'base.html' %}
 {% block content %}
 
-<div class = "userhome"></div>
-    <form id="logout" action="/logout" method="POST">
-        <input type="submit" value="Log out">
-    </form>
     <div id="greeting">Hello, {{ session["username"] }}</div>
 
+
+<div class="trips-background-image"></div>
+<div class="col-xs-12 col-lg-6">
 
 <div id="contentactivity">
   <h3>Search for like-minded travelers by activity </h3>
@@ -68,24 +18,12 @@
       
        </select></center>
 
-    <div id="table" class='col-md-8-offset-1'></div> 
-
-
-
-<!--   <h2>Suggested Carpool Locations</h2>
-  <center><iframe src="https://www.google.com/maps/d/embed?mid=13WSKPRRgvcIs9tGW3taeL2jXVQs" width="440" height="280"></iframe></center>
-
-  <h2>Suggested Slacklining Bay Area Locations</h2>
-  <iframe src="https://www.google.com/maps/d/embed?mid=1yxpiz1ooxVP_rJD_5zkPGEC6Wm4" width="440" height="280"></iframe>
- -->
+    <div id="table" class='col-md-8-offset-1 search-results-table'></div> 
 
 <script>
-
 function showActivity(evt) {
     evt.preventDefault();
-
     var url = "/usertrip?activity_id=" + $('#activity_id').val();
-
     $("#table").empty();
     $.get(url, function(data) {
        var tr;
@@ -100,9 +38,7 @@ function showActivity(evt) {
     }
     });
 }
-
 $("#activitySubmit").on('click', showActivity);
-
 </script>
 
 

@@ -6,25 +6,58 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Poolavan</title>
 
+    <!-- Fonts -->
 
-  <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/ridesharing/fonts.css">
+    <!-- Styles -->
+    <link href="/static/ridesharing/style.css" rel="stylesheet">
+    <link href="/static/ridesharing/custom.css" rel="stylesheet">
+
+
+
+    <!-- Bootstrap Core CSS -->
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap and Custom JS -->
-    <script async defer src="https://apis.google.com/js/platform.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="/static/scrolling-nav.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
+      <!-- Bootstrap and Custom JS -->
+  <script async defer src="https://apis.google.com/js/platform.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet"  type="text/css" href="/static/styles.css">
-    <script  src="status.js"></script>
+
 </head>
 
-       <form action="/userhome" method="POST">
-          <input type="submit" value="Home">
-    </form>
+{% block menu %}
+ <!-- Navigation -->
+       
+        <nav class="navbar navbar-custom navbar-static-top thedesktopnav" role="navigation">
+            
+            <ul class="thelinks">
+                <li>
+                  <a class="page-scroll withripple" href="http://localhost:5000/userhome" rollapp-href="http://localhost:5000/userhome">HOME</a>
+                </li>   
+                <li>
+                    <a class="page-scroll withripple" href="http://localhost:5000/mytrips" rollapp-href="http://localhost:5000/mytrips">My Trips</a>
+                </li>                
+                <li>
+                    <a class="page-scroll withripple" href="http://localhost:5000/createtrip" rollapp-href="http://localhost:5000/createtrip">Create Trip</a>
+                </li>
+                <li>
+                    <a class="page-scroll withripple" href="http://localhost:5000/trips" rollapp-href="http://localhost:5000/trips">View Trips</a>
+                </li>
+                <li>
+                    <a class="page-scroll withripple" href="http://localhost:5000/users" rollapp-href="http://localhost:5000/users">View Users</a>
+                </li>
+                <li>
+                   <align="right" name="form1" method="post" action="/logout">
+                    <label class="logoutLblPos">
+                    <a href="/logout" id="submit2" >Log Out</a>
+                    </label>
+                   </form>
+                </li>
+            </ul>
+        </nav>
+{% endblock %}
 
 {% with messages = get_flashed_messages() %}
     {% for message in messages %}

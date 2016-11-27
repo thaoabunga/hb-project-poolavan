@@ -6461,7 +6461,6 @@ body [class^="well well-material-"] .option, body [class^="well well-material-"]
     color: rgba(0, 0, 0, 0.84);
 }
 body .well, body .jumbotron, .container .well, .container .jumbotron, .container-fluid .well, .container-fluid .jumbotron {
-    background-color: #fff;
     padding: 19px;
     margin-bottom: 20px;
     border-radius: 2px;
@@ -10451,16 +10450,16 @@ body {
     width: 46px;
 }
 ::-webkit-input-placeholder {
-    color: #00a665 !important;
+    color: darkorange !important;
 }
 :-moz-placeholder {
-    color: #00a665 !important;
+    color: darkorange !important;
 }
 ::-moz-placeholder {
-    color: #00a665 !important;
+    color: darkorange !important;
 }
 :-ms-input-placeholder {
-    color: #00a665 !important;
+    color: darkorange !important;
 }
 body {
     text-rendering: optimizeLegibility;
@@ -10604,7 +10603,7 @@ body {
     color: #4d4d4d;
 }
 .navbar-custom.thedesktopnav ul.thelinks li a:hover {
-    color: #00a665;
+    color: darkorange;
 }
 .navbar-custom.thedesktopnav.top-nav-greenit {
     background: #00a665;
@@ -11448,5 +11447,31 @@ footer a i.circle {
 }
 
 #greeting{
-    font-size: 20;
+    font-size: 78px;
+    text-align: center;
+}
+
+.logintable{
+    background-color: transparent;
+    left: 30%;
+    top: 40%;
+    position: absolute
+}
+
+#cleartrip{
+    position: absolute;
+    left:30%;
+    top: 40%;
+    width: 450px;
+
+}
+
+#cleartrip  input  {
+    
+float :right;
+
+}
+
+#cleartrip select {
+    float:right;
 }

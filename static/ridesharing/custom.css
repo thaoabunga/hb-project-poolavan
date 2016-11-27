@@ -1,0 +1,36 @@
+.search-results-table {
+    padding-top: 30px;
+    margin: 0 auto;
+    width: 200px;
+}
+
+.search-results-table td {
+    width: 100%;
+}
+
+.trips-background-image {
+	position: absolute;
+	background: url("../snowchicas.jpg");
+    opacity: 0.3;
+    height: 1440px;
+    width: 100%;
+}
+
+ #map {
+        width: 500px;
+        height: 400px;
+        margin-top: 10px;
+ }
+ .logintable{
+    background-color: transparent;
+    left: 30%;
+    top: 90%;
+    position: absolute
+ }
+
+#contentactivity {
+    left: 54%;
+    top: 90%;
+    position: relative;
+}
+

@@ -1,57 +1,6 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
 
-<html lang="en">
-
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1.0">
-        <title>Poolavan | Ridesharing for Adventurers. </title>
-        <meta name="description" content="poolavan is a ridesharing tool for those who are seeking to get out there.">
-
-
-        <!-- Fonts -->
-        <link href="./ridesharing/css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="/static/ridesharing/fonts.css">
-        <!-- Styles -->
-        <link href="/static/ridesharing/style.css" rel="stylesheet">
-        <link href="./ridesharing_files/css(1)" rel="stylesheet" type="text/css">
-
-    </head>
-
-
-
-
-        <!-- Navigation -->
-       
-        <nav class="navbar navbar-custom navbar-static-top thedesktopnav" role="navigation">
-            
-            <ul class="thelinks">
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/mytrips" rollapp-href="http://localhost:5000/mytrips">My Trips</a>
-                </li>                
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/createtrip" rollapp-href="http://localhost:5000/createtrip">Create Trip</a>
-                </li>
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/trips" rollapp-href="http://localhost:5000/trips">View Trips</a>
-                </li>
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/users" rollapp-href="http://localhost:5000/users">View Users</a>
-                </li>
-
-            </ul>
-        </nav>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-git.js"></script>
-<script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
 <script>
 function validateForm()
 {
@@ -70,13 +19,13 @@ function validateForm()
 }
 </script>
 
-{% extends 'base.html' %}
-{% block content %}
+
 
 <h1>Create a trip!</h1>
 
-<h3>Let's get outside, together!</h3>
+<h2>Let's get outside, together!</h2>
 <form name="myForm" action="/createtrip" onsubmit="return validateForm()" method="post">
+  <div id="cleartrip">
     <p>Trip Name <input type="text" name="trip_name"></p>
     <p>Origin <input type="text" name="departure_address"></p>
     <p>Arrival <input type="text" name="arrival_address"></p>
@@ -111,10 +60,10 @@ function validateForm()
     </p> 
 
     <p><input type="submit" value="Ahoy!"></p>
+  </div>
 </form>
 
 {% endblock %}
 
-</html>
-</head>
+
  

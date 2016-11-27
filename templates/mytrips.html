@@ -1,56 +1,7 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1.0">
-        <title>Poolavan | Ridesharing for Adventurers. </title>
-        <meta name="description" content="poolavan is a ridesharing tool for those who are seeking to get out there.">
-
-
-        <!-- Fonts -->
-        <link href="./ridesharing/css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="/static/ridesharing/fonts.css">
-        <!-- Styles -->
-        <link href="/static/ridesharing/style.css" rel="stylesheet">
-        <link href="./ridesharing_files/css(1)" rel="stylesheet" type="text/css">
-
-    </head>
-
-
-
-
-        <!-- Navigation -->
-       
-        <nav class="navbar navbar-custom navbar-static-top thedesktopnav" role="navigation">
-            
-            <ul class="thelinks">
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/mytrips" rollapp-href="http://localhost:5000/mytrips">My Trips</a>
-                </li>                
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/createtrip" rollapp-href="http://localhost:5000/createtrip">Create Trip</a>
-                </li>
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/trips" rollapp-href="http://localhost:5000/trips">View Trips</a>
-                </li>
-                <li>
-                    <a class="page-scroll withripple" href="http://localhost:5000/users" rollapp-href="http://localhost:5000/users">View Users</a>
-                </li>
-
-            </ul>
-        </nav>
-
-
-
-
-
 {% extends 'base.html' %}
 {% block content %}
-<div class="well spaced" style="width:97%;">
 
+<div class="trips-background-image"></div>
 <div class="col-xs-12 col-lg-6">
 
         <h2>My Trips:</h2>
@@ -87,15 +38,28 @@
 
         {% endfor %}
 </div>
+<div class="col-xs-12 col-lg-6">
+  <h2>Get Trip Directions</h2>
+    <form id="calculate-route" name="calculate-route" action="#" method="get">
+      <label for="from">From:</label>
+      <input type="text" id="from" name="from" required="required" placeholder="An address" size="30" />
+      <br />
 
-        <div id="directionsService"></div>
+      <label for="to">To:</label>
+      <input type="text" id="to" name="to" required="required" placeholder="Another address" size="30" />
+      <br />
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Find a route using Geolocation and Google Maps API</title>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCUxxp_2hg3lRTk_uXDipCJ4MpGcUy9-7I">
+      <input type="submit" />
+      <input type="reset" />
+    </form>
+    <div id="map"></div>
+    <p id="error"></p>
+</div>
+ <div id="directionsService"></div>
+
+
+
+ <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCUxxp_2hg3lRTk_uXDipCJ4MpGcUy9-7I">
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
@@ -159,33 +123,5 @@
         });
       });
     </script>
-    <style type="text/css">
-      #map {
-        width: 500px;
-        height: 400px;
-        margin-top: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Get Trip Directions</h2>
-    <form id="calculate-route" name="calculate-route" action="#" method="get">
-      <label for="from">From:</label>
-      <input type="text" id="from" name="from" required="required" placeholder="An address" size="30" />
-      <br />
-
-      <label for="to">To:</label>
-      <input type="text" id="to" name="to" required="required" placeholder="Another address" size="30" />
-      <br />
-
-      <input type="submit" />
-      <input type="reset" />
-    </form>
-    <div id="map"></div>
-    <p id="error"></p>
-  </body>
-</html>
-<div class="row">
-
    
   {% endblock %}

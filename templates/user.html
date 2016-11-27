@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="well spaced" style="width:97%;">
+
 <h1>User {{ user.user_id }}</h1>
 
-<div class="row">
+
         <p>Name: {{ user.first_name }}</p>
         <p>Phone Number: {{ user.phone_number }}</p>
         <p><a href= "mailto:{{ user.username }}">Send Email</a></p>
