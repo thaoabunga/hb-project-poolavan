@@ -2,6 +2,7 @@
 
 Poolavan is ridesharing flask application that brings adventurers into the great outdoors. It solves the problem of planning for a long-distance carpool into the wilderness, while reducing costs and environmental impact. Users can create trips, search for other users with common activity interests, and join existing trips. Poolavan connects people to opt outside. 
 
+![Alt text](/relative/path/to/home.png?raw=true "Home")
 
 # Table of Contents
 * [Tech stack](#technologies)
