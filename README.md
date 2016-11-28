@@ -22,7 +22,7 @@ API: Google Maps API
 
 - Install PostgreSQL (Mac OSX).
 - Python 2.6 or greater.
-- A Google account with Gmail enabled.
+- A Google account with Google Maps API enablement.
 
 
 Clone repository:
