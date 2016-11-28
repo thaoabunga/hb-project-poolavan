@@ -10,7 +10,7 @@ Poolavan is ridesharing flask application that brings adventurers into the great
 
 ## <a name="technologies"></a>Technologies
 Backend: Python, Flask
-Frontend: JavaScript, jQuery, AJAX, Jinja2, Bootstrap, HTML5, CSS3
+Frontend: JavaScript, jQuery, AJAX, Jinja2, Bootstrap, HTML/CSS
 Database: PostgreSQL, SQLAlchemy
 API: Google Maps API
 
@@ -43,7 +43,7 @@ Install dependencies.
 ```
 $ pip install -r requirements.txt
 ```
-To enable the Google Maps API, you should create your project in the [Google Developers Console](https://developers.google.com/maps/documentation/javascript/).
+To enable the Google Maps API, create your project in the [Google Developers Console](https://developers.google.com/maps/documentation/javascript/).
 
 Run PostgreSQL 
 
