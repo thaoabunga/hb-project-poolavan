@@ -13,7 +13,18 @@ class MyAppIntegrationTestCase(unittest.TestCase):
         result = client.get('/userlogin', data ={'username': 'password'})
         self.assertIn('<div id="homepage-block"></div>', result.data)
 
-    def 
+    def test_register(self):
+        client = server.app.test_client()
+        server.app.config['TESTING'] = True
+        result = client.get('/register')
+        self.assertIn('<h1>Register</h1>', result.data)
+
+    def test_mytrips(self):
+        client = server.app.test_client()
+        server.app.config['TESTING'] = True
+        result = client.get('/mytrips')
+        self.assertIn('<h2>My Trips:</h2>', result.data)
+
 
 if __name__ == "__main__":
     unittest.main()
