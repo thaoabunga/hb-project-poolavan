@@ -20,7 +20,7 @@ API: Google Maps API
 ## <a name="install"></a>Installation
 
 
-####Prerequisite
+####Prerequisites
 
 - Install PostgreSQL (Mac OSX).
 - Python 2.6 or greater.
