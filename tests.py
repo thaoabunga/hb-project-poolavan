@@ -7,9 +7,12 @@ from datetime import datetime
 import json
 from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
 
-class MyAppUnitTestCase(TestCase):
+
+
+class MyAppUnitTestCase(unittest.TestCase):
     def setUp(self):
-    """Stuff to do before every test."""
+    # """Stuff to do before every test."""
+
         self.client = app.test_client()
         app.config['TESTING'] = True
 
@@ -19,9 +22,24 @@ class MyAppUnitTestCase(TestCase):
         example_data()
 
     def tearDown(self):
-    """Do at end of every test."""
+        """Do at end of every test."""
         db.session.close()
         db.drop_all()
+
+    def example_data():
+        """Create some sample data."""
+
+        SaffyTrip = Trip(trip_id=2, departure_address='Oakland', car_capacity=2)
+        AnnaTrip = Trip(trip_id=11, departure_address='Berkeley', car_capacity=2)
+        SamTrip = Trip(trip_id=6, departure_address='Oakland', car_capacity=3)
+
+        Saffy = User(first_name='Saffy', )
+        Anna = User(first_name='Anna', )
+        Sam = User(name='Sam',)
+       
+
+        db.session.add_all([ SaffyTrip, AnnaTrip, SamTrip, Saffy, Anna, Sam])
+        db.session.commit()
 
 class MyAppIntegrationTestCase(unittest.TestCase):
     def test_index(self):
@@ -45,7 +63,22 @@ class MyAppIntegrationTestCase(unittest.TestCase):
         client = server.app.test_client()
         server.app.config['TESTING'] = True
         result = client.get('/mytrips')
-        self.assertIn('<h2>My Trips:</h2>', result.data)
+        self.assertIn('<h2>Rejected requests:</h2>', result.data)
+
+
+
+class FlaskTests(unittest.TestCase):
+
+    def setUp(self):
+    # """Stuff to do before every test."""
+
+        app.config['TESTING'] = True
+        app.config['SECRET_KEY'] = 'key'
+        self.client = app.test_client()
+
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess['user_id'] = 1
 
 
 if __name__ == "__main__":
