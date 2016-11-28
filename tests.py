@@ -1,5 +1,27 @@
 import unittest
 import server
+from jinja2 import StrictUndefined
+from flask import Flask, render_template, request, redirect, session, flash, jsonify
+from flask_debugtoolbar import DebugToolbarExtension
+from datetime import datetime
+import json
+from model import connect_to_db, db, User, Trip, UserTrip, Role, Activity
+
+class MyAppUnitTestCase(TestCase):
+    def setUp(self):
+    """Stuff to do before every test."""
+        self.client = app.test_client()
+        app.config['TESTING'] = True
+
+        connect_to_db(app, "postgresql:///testdb")
+
+        db.create_all()
+        example_data()
+
+    def tearDown(self):
+    """Do at end of every test."""
+        db.session.close()
+        db.drop_all()
 
 class MyAppIntegrationTestCase(unittest.TestCase):
     def test_index(self):
