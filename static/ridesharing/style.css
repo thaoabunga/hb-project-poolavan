@@ -11449,6 +11449,7 @@ footer a i.circle {
 #greeting{
     font-size: 78px;
     text-align: center;
+    padding-top:50px;
 }
 
 .logintable{
@@ -11496,4 +11497,8 @@ float :right;
 
 
 
+}
+
+li {
+  list-style-type: none;
 }

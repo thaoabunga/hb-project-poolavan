@@ -23,7 +23,7 @@
 
         {% for user_trip in pending_trips %}
         <li><a href="/mytrips/{{ user_trip.trip.trip_id }}">
-            {{ user_trip.trip.trip_name }} | See details | <button class="statusBtn" data-action="accept" data-trip={{ user_trip.user_trip_id }}>Accept</button> | <button data-action="reject" data-trip={{ user_trip.user_trip_id }} class="statusBtn">Reject</button> 
+            {{ user_trip.trip.trip_name }} | <button class="statusBtn" data-action="accept" data-trip={{ user_trip.user_trip_id }}>Accept</button> | <button data-action="reject" data-trip={{ user_trip.user_trip_id }} class="statusBtn">Reject</button> 
         </li></a>
         {% endfor %}
 
