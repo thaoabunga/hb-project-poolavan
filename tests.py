@@ -41,6 +41,7 @@ class MyAppUnitTestCase(unittest.TestCase):
         db.session.add_all([ SaffyTrip, AnnaTrip, SamTrip, Saffy, Anna, Sam])
         db.session.commit()
 
+
 class MyAppIntegrationTestCase(unittest.TestCase):
     def test_index(self):
         client = server.app.test_client()
@@ -58,6 +59,9 @@ class MyAppIntegrationTestCase(unittest.TestCase):
         server.app.config['TESTING'] = True
         result = client.get('/register')
         self.assertIn('<h1>Register</h1>', result.data)
+
+    def test_register_new_user(self): # TODO: Review all coverage
+        client 
 
     def test_mytrips(self):
         client = server.app.test_client()
